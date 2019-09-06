@@ -2,9 +2,9 @@ package me.MinecraftSkills.main;
 
 public class Player {
 
-	String uuid;
+	public String uuid;
 	
-	int lvlWoodcutting;
+	public int lvlWoodcutting;
 	int lvlAgility;
 	int lvlMining;
 	int lvlFarming;

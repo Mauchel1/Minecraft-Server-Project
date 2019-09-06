@@ -60,6 +60,8 @@ public class main extends JavaPlugin implements Listener{
 
         playerConfig = new YamlConfiguration();
         try {
+    		Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE+"try to load configfile");
+
             playerConfig.load(playerConfigFile);
             FillPlayerListFromConfig();
         } catch (IOException | InvalidConfigurationException e) {
@@ -106,8 +108,11 @@ public class main extends JavaPlugin implements Listener{
 		
 	}
 	
+	@SuppressWarnings("unchecked")
 	void FillPlayerListFromConfig() {
-		//playerConfig.getList()
+		Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE+"try to parse playerlist in List");
+
+			playerList = (List<Player>) playerConfig.getList("playerlist");
 		}
 	
 	
