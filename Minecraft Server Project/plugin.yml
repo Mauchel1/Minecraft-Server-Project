@@ -4,6 +4,6 @@ version: 1.0
 author: Mauchel1
 api-version: 1.14
 commands:
-  test:
-    description: TestCommand
-    usage: /<command>
+  skill_mining:
+    description: Zeigt die Bergbau Fertigkeiten
+    usage: /skill_mining
