@@ -60,6 +60,7 @@ stats:
   forced-stats: {}
 world-settings:
   default:
+    view-distance: default
     verbose: true
     item-despawn-rate: 6000
     arrow-despawn-rate: 1200
