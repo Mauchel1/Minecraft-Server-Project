@@ -1,8 +1,8 @@
-name: main
+name: MinecraftSkills
 main: me.MinecraftSkills.main.main
 version: 1.0
 author: Mauchel1
-api-version: 1.13
+api-version: 1.14
 commands:
   test:
     description: TestCommand
