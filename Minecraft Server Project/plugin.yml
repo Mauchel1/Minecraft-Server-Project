@@ -7,3 +7,6 @@ commands:
   skill_mining:
     description: Zeigt die Bergbau Fertigkeiten
     usage: /skill_mining
+  skill_agility:
+    description: Zeigt die Agility Fertigkeiten
+    usage: /skill_agility

@@ -5,6 +5,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
 import org.bukkit.inventory.ItemStack;
 
 public class MiningCommands implements CommandExecutor{
@@ -16,6 +17,7 @@ public class MiningCommands implements CommandExecutor{
             // Here we need to give items to our player
             // Create a new ItemStack (type: brick)
             ItemStack bricks = new ItemStack(Material.BRICK, 5);
+            me.MinecraftSkills.main.Player.setAgilityXP("TestUserUUID");
 
             // Give the player our items (comma-seperated list of all ItemStack)
             player.getInventory().addItem(bricks);

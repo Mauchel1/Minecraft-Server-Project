@@ -1,15 +1,8 @@
 package me.MinecraftSkills.main;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.configuration.InvalidConfigurationException;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -20,16 +13,13 @@ import me.MinecraftSkills.main.Commands.MiningCommands;
 
 public class main extends JavaPlugin implements Listener{
 
-    private File playerConfigFile;
-    private FileConfiguration playerConfig;
     
-    public List<Player> playerList = new ArrayList<Player>();
-
+	public static main p;
 	
 	// Fired when plugin is first enabled
     @Override
     public void onEnable() {
-    	loadConfig();
+    	Player.loadConfig();
     	registerCommands();
     	registerEvents();
     	
@@ -40,42 +30,16 @@ public class main extends JavaPlugin implements Listener{
     // Fired when plugin is disabled
     @Override
     public void onDisable() {
-    	try {
-    		playerConfig.set("playerlist", playerList);
-			playerConfig.save(playerConfigFile);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+    	Player.saveConfig();
     	System.out.println("Plugin MinecraftSkills gestoppt");
     	Bukkit.getConsoleSender().sendMessage(ChatColor.RED+"Plugin MinecraftSkills gestoppt");
     	
     }
     
-    private void loadConfig() {
-        playerConfigFile = new File(getDataFolder(), "playerconfig.yml");
-        if (!playerConfigFile.exists()) {
-            playerConfigFile.getParentFile().mkdirs();
-            saveResource("playerconfig.yml", false);
-         }
-
-        playerConfig = new YamlConfiguration();
-        try {
-    		Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE+"try to load configfile");
-
-            playerConfig.load(playerConfigFile);
-            FillPlayerListFromConfig();
-        } catch (IOException | InvalidConfigurationException e) {
-            e.printStackTrace();
-        }
-    }
-    
-    public FileConfiguration getPlayerConfig() {
-        return playerConfig;
-    }
-    
     private void registerCommands() 
     {
     	this.getCommand("skill_mining").setExecutor(new MiningCommands());
+    	//this.getCommand("skill_agility").setExecutor(new MiningCommands());
     }
     
     private void registerEvents()
@@ -90,7 +54,7 @@ public class main extends JavaPlugin implements Listener{
 	{
 		Bukkit.broadcastMessage("Moin du Hobelschlonze" );
 		boolean found = false;
-		for (Player player : playerList) {
+		for (Player player : Player.playerList) {
 			if (player.uuid.equals(event.getPlayer().getUniqueId().toString())) {
 				Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE+"Beigetretener Spieler bereits geladen");
 				found = true;
@@ -99,21 +63,14 @@ public class main extends JavaPlugin implements Listener{
 		}
 		if (!found) {
 			Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE+"Beigetretener Spieler Config geschrieben");
-			getPlayerConfig().set("player", event.getPlayer().getUniqueId().toString());
+			Player.getPlayerConfig().set("player", event.getPlayer().getUniqueId().toString());
 			Player p = new Player(event.getPlayer().getUniqueId().toString());
-			playerList.add(p);
+			Player.playerList.add(p);
 			
 		}
 		
 		
 	}
-	
-	@SuppressWarnings("unchecked")
-	void FillPlayerListFromConfig() {
-		Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE+"try to parse playerlist in List");
-
-			playerList = (List<Player>) playerConfig.getList("playerlist");
-		}
 	
 	
 }
