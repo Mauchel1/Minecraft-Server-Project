@@ -8,8 +8,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import me.MinecraftSkills.main.Commands.MiningCommands;
-//import me.MinecraftSkills.main.Listener.*;
+import me.MinecraftSkills.main.Commands.*;
+import me.MinecraftSkills.main.Listener.*;
 
 public class main extends JavaPlugin implements Listener{
 
@@ -19,6 +19,7 @@ public class main extends JavaPlugin implements Listener{
 	// Fired when plugin is first enabled
     @Override
     public void onEnable() {
+    	p = this;
     	Player.loadConfig();
     	registerCommands();
     	registerEvents();
@@ -39,13 +40,13 @@ public class main extends JavaPlugin implements Listener{
     private void registerCommands() 
     {
     	this.getCommand("skill_mining").setExecutor(new MiningCommands());
-    	//this.getCommand("skill_agility").setExecutor(new MiningCommands());
+    	this.getCommand("skill_agility").setExecutor(new AgilityCommand());
     }
     
     private void registerEvents()
     {   
-//    	Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), this);
-    	Bukkit.getPluginManager().registerEvents(this, this);
+    	Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), this);
+    	//Bukkit.getPluginManager().registerEvents(this, this);
     	
     }
     
@@ -64,8 +65,8 @@ public class main extends JavaPlugin implements Listener{
 		if (!found) {
 			Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE+"Beigetretener Spieler Config geschrieben");
 			Player.getPlayerConfig().set("player", event.getPlayer().getUniqueId().toString());
-			Player p = new Player(event.getPlayer().getUniqueId().toString());
-			Player.playerList.add(p);
+			//Player p = new Player(event.getPlayer().getUniqueId().toString());
+			//Player.playerList.add(p);
 			
 		}
 		

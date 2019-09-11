@@ -46,15 +46,17 @@ public class Player {
     }
 	
     public static void loadConfig() {
+		Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE + "loadConfig()");
         playerConfigFile = new File(plugin.getDataFolder(), "playerconfig.yml");
         if (!playerConfigFile.exists()) {
             playerConfigFile.getParentFile().mkdirs();
+    		Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE + "SaveConfig()");
             plugin.saveResource("playerconfig.yml", false);
          }
 
         playerConfig = new YamlConfiguration();
         try {
-    		Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE+"try to load configfile");
+    		Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE + "try to load configfile");
 
             playerConfig.load(playerConfigFile);
             FillPlayerListFromConfig();
@@ -65,8 +67,10 @@ public class Player {
 
     public static void saveConfig() {
     	try {
+    		Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE + "Try to save Config");
     		playerConfig.set("playerlist", playerList);
 			playerConfig.save(playerConfigFile);
+    		Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE + "Config saved");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -81,19 +85,21 @@ public class Player {
 		}
 
 
-	public double getAgilityXP(String UUID) { return playerConfig.getDouble("Player." + UUID + "XP.Agility", 1.0); }
-	public double getMiningXP(String UUID) { return playerConfig.getDouble("Player." + UUID + "XP.Mining", 1.0); }
-	public double getFarmingXP(String UUID) { return playerConfig.getDouble("Player." + UUID + "XP.Farming", 1.0); }
-	public double getWoodcuttingXP(String UUID) { return playerConfig.getDouble("Player." + UUID + "XP.Woodcutting", 1.0); }
-	public double getAlchemyXP(String UUID) { return playerConfig.getDouble("Player." + UUID + "XP.Alchemy", 1.0); }
-	public double getFishingXP(String UUID) { return playerConfig.getDouble("Player." + UUID + "XP.Fishing", 1.0); }
+	public static String getPlayer(String UUID) { return playerConfig.getString("Player." + UUID); }
 	
-	public int getAgilityLvl(String UUID) { return playerConfig.getInt("Player." + UUID + "Lvl.Agility", 1); }
-	public int getMiningLvl(String UUID) { return playerConfig.getInt("Player." + UUID + "Lvl.Mining", 1); }
-	public int getFarmingLvl(String UUID) { return playerConfig.getInt("Player." + UUID + "Lvl.Farming", 1); }
-	public int getWoodcuttingLvl(String UUID) { return playerConfig.getInt("Player." + UUID + "Lvl.Woodcutting", 1); }
-	public int getAlchemyLvl(String UUID) { return playerConfig.getInt("Player." + UUID + "Lvl.Alchemy", 1); }
-	public int getFishingLvl(String UUID) { return playerConfig.getInt("Player." + UUID + "Lvl.Fishing", 1); }
+	public static double getAgilityXP(String UUID) { return playerConfig.getDouble("Player." + UUID + "XP.Agility", 1.0); }
+	public static double getMiningXP(String UUID) { return playerConfig.getDouble("Player." + UUID + "XP.Mining", 1.0); }
+	public static double getFarmingXP(String UUID) { return playerConfig.getDouble("Player." + UUID + "XP.Farming", 1.0); }
+	public static double getWoodcuttingXP(String UUID) { return playerConfig.getDouble("Player." + UUID + "XP.Woodcutting", 1.0); }
+	public static double getAlchemyXP(String UUID) { return playerConfig.getDouble("Player." + UUID + "XP.Alchemy", 1.0); }
+	public static double getFishingXP(String UUID) { return playerConfig.getDouble("Player." + UUID + "XP.Fishing", 1.0); }
+	
+	public static int getAgilityLvl(String UUID) { return playerConfig.getInt("Player." + UUID + "Lvl.Agility", 1); }
+	public static int getMiningLvl(String UUID) { return playerConfig.getInt("Player." + UUID + "Lvl.Mining", 1); }
+	public static int getFarmingLvl(String UUID) { return playerConfig.getInt("Player." + UUID + "Lvl.Farming", 1); }
+	public static int getWoodcuttingLvl(String UUID) { return playerConfig.getInt("Player." + UUID + "Lvl.Woodcutting", 1); }
+	public static int getAlchemyLvl(String UUID) { return playerConfig.getInt("Player." + UUID + "Lvl.Alchemy", 1); }
+	public static int getFishingLvl(String UUID) { return playerConfig.getInt("Player." + UUID + "Lvl.Fishing", 1); }
 
 	public static void setAgilityXP(String UUID ) {
 		playerConfig.set("Player." + UUID + "XP.Agility", 1.0);

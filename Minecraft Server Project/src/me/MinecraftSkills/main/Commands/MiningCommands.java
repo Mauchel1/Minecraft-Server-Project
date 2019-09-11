@@ -17,7 +17,6 @@ public class MiningCommands implements CommandExecutor{
             // Here we need to give items to our player
             // Create a new ItemStack (type: brick)
             ItemStack bricks = new ItemStack(Material.BRICK, 5);
-            me.MinecraftSkills.main.Player.setAgilityXP("TestUserUUID");
 
             // Give the player our items (comma-seperated list of all ItemStack)
             player.getInventory().addItem(bricks);

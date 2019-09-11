@@ -14,5 +14,8 @@ public class PlayerJoinListener implements Listener
 	{
 		Bukkit.broadcastMessage("Moin du Hobelschlonze" + event.getPlayer().getUniqueId().toString() );
 		event.getPlayer().getUniqueId().toString();
+		event.setJoinMessage("Willkommen du Schwuler Hengst!");
+		
+		
 	}
 }
