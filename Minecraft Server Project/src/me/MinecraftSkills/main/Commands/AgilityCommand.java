@@ -17,7 +17,7 @@ protected static final main plugin = main.p;
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
             //me.MinecraftSkills.main.Player.setAgilityXP("TestUserUUID");
-            sender.sendMessage("Du hast " + me.MinecraftSkills.main.Player.getAgilityXP("TestUserUUID"));
+            sender.sendMessage("Du hast " + me.MinecraftSkills.main.PlayerManager.getAgilityXP("TestUserUUID"));
 
         }
 

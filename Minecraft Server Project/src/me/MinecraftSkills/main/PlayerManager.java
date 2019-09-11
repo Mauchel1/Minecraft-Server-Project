@@ -11,14 +11,14 @@ import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-public class Player {
+public class PlayerManager {
 
 	protected static final main plugin = main.p;
     private static File playerConfigFile;
     private static FileConfiguration playerConfig;
 
     
-    public static List<Player> playerList = new ArrayList<Player>();
+    public static List<PlayerManager> playerList = new ArrayList<PlayerManager>();
 
 	public String uuid;
 	
@@ -37,7 +37,7 @@ public class Player {
 	int xpFishing;
 	
 	
-	public Player(String UUID) {
+	public PlayerManager(String UUID) {
 		uuid = UUID;
 	}
 	
@@ -81,7 +81,7 @@ public class Player {
 	static void FillPlayerListFromConfig() {
 		Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE+"try to parse playerlist in List");
 
-			playerList = (List<Player>) Player.getPlayerConfig().getList("playerlist");
+			playerList = (List<PlayerManager>) PlayerManager.getPlayerConfig().getList("playerlist");
 		}
 
 

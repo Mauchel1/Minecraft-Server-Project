@@ -20,7 +20,7 @@ public class main extends JavaPlugin implements Listener{
     @Override
     public void onEnable() {
     	p = this;
-    	Player.loadConfig();
+    	PlayerManager.loadConfig();
     	registerCommands();
     	registerEvents();
     	
@@ -31,7 +31,7 @@ public class main extends JavaPlugin implements Listener{
     // Fired when plugin is disabled
     @Override
     public void onDisable() {
-    	Player.saveConfig();
+    	PlayerManager.saveConfig();
     	System.out.println("Plugin MinecraftSkills gestoppt");
     	Bukkit.getConsoleSender().sendMessage(ChatColor.RED+"Plugin MinecraftSkills gestoppt");
     	
@@ -55,7 +55,7 @@ public class main extends JavaPlugin implements Listener{
 	{
 		Bukkit.broadcastMessage("Moin du Hobelschlonze" );
 		boolean found = false;
-		for (Player player : Player.playerList) {
+		for (PlayerManager player : PlayerManager.playerList) {
 			if (player.uuid.equals(event.getPlayer().getUniqueId().toString())) {
 				Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE+"Beigetretener Spieler bereits geladen");
 				found = true;
@@ -64,7 +64,7 @@ public class main extends JavaPlugin implements Listener{
 		}
 		if (!found) {
 			Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE+"Beigetretener Spieler Config geschrieben");
-			Player.getPlayerConfig().set("player", event.getPlayer().getUniqueId().toString());
+			PlayerManager.getPlayerConfig().set("player", event.getPlayer().getUniqueId().toString());
 			//Player p = new Player(event.getPlayer().getUniqueId().toString());
 			//Player.playerList.add(p);
 			
