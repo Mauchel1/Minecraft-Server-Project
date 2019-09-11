@@ -39,8 +39,12 @@ public class main extends JavaPlugin implements Listener{
     
     private void registerCommands() 
     {
-    	this.getCommand("skill_mining").setExecutor(new MiningCommands());
+    	this.getCommand("skill_mining").setExecutor(new MiningCommand());
     	this.getCommand("skill_agility").setExecutor(new AgilityCommand());
+    	this.getCommand("skill_agility").setExecutor(new AlchemyCommand());
+    	this.getCommand("skill_agility").setExecutor(new FarmingCommand());
+    	this.getCommand("skill_agility").setExecutor(new FishingCommand());
+    	this.getCommand("skill_agility").setExecutor(new WoodcuttingCommand());
     }
     
     private void registerEvents()

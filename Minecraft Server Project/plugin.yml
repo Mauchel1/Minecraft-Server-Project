@@ -10,3 +10,16 @@ commands:
   skill_agility:
     description: Zeigt die Agility Fertigkeiten
     usage: /skill_agility
+  skill_alchemy:
+    description: Zeigt die Alchemie Fertigkeiten
+    usage: /skill_alchemy
+  skill_farming:
+    description: Zeigt die Farm Fertigkeiten
+    usage: /skill_farming
+  skill_fishing:
+    description: Zeigt die Fischer Fertigkeiten
+    usage: /skill_fishing
+  skill_woodcutting:
+    description: Zeigt die Woodcutting Fertigkeiten
+    usage: /skill_woodcutting
+    

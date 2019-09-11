@@ -8,8 +8,7 @@ import org.bukkit.entity.Player;
 import me.MinecraftSkills.main.PlayerManager;
 import me.MinecraftSkills.main.main;
 
-
-public class AgilityCommand implements CommandExecutor
+public class AlchemyCommand implements CommandExecutor
 {
 
 protected static final main plugin = main.p;
@@ -17,7 +16,7 @@ protected static final main plugin = main.p;
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
-            sender.sendMessage("Du hast " + PlayerManager.getAgilityXP(((Player) sender).getUniqueId().toString()) + " XP in Level " + PlayerManager.getAgilityLvl(((Player) sender).getUniqueId().toString()));
+            sender.sendMessage("Du hast " + PlayerManager.getAlchemyXP(((Player) sender).getUniqueId().toString()) + " XP in Level " + PlayerManager.getAlchemyLvl(((Player) sender).getUniqueId().toString()));
 
         }
 

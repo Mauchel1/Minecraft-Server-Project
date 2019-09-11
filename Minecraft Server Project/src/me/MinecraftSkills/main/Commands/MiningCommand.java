@@ -8,7 +8,9 @@ import org.bukkit.entity.Player;
 
 import org.bukkit.inventory.ItemStack;
 
-public class MiningCommands implements CommandExecutor{
+import me.MinecraftSkills.main.PlayerManager;
+
+public class MiningCommand implements CommandExecutor{
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -20,6 +22,8 @@ public class MiningCommands implements CommandExecutor{
 
             // Give the player our items (comma-seperated list of all ItemStack)
             player.getInventory().addItem(bricks);
+            sender.sendMessage("Du hast " + PlayerManager.getMiningXP(((Player) sender).getUniqueId().toString()) + " XP in Level " + PlayerManager.getMiningLvl(((Player) sender).getUniqueId().toString()));
+
         }
 
         // If the player (or console) uses our command correct, we can return true
