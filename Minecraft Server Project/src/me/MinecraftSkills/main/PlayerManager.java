@@ -2,8 +2,8 @@ package me.MinecraftSkills.main;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+//import java.util.ArrayList;
+//import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -18,28 +18,9 @@ public class PlayerManager {
     private static FileConfiguration playerConfig;
 
     
-    public static List<PlayerManager> playerList = new ArrayList<PlayerManager>();
+    //public static List<PlayerManager> playerList = new ArrayList<PlayerManager>();
 
-	public String uuid;
-	
-	public int lvlWoodcutting;
-	int lvlAgility;
-	int lvlMining;
-	int lvlFarming;
-	int lvlAlchemy;
-	int lvlFishing;
-	
-	int xpWoodcutting;
-	int xpAgility;
-	int xplMining;
-	int xpFarming;
-	int xpAlchemy;
-	int xpFishing;
-	
-	
-	public PlayerManager(String UUID) {
-		uuid = UUID;
-	}
+	public PlayerManager() {	}
 	
     public static FileConfiguration getPlayerConfig() {
         return playerConfig;
@@ -59,7 +40,7 @@ public class PlayerManager {
     		Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE + "try to load configfile");
 
             playerConfig.load(playerConfigFile);
-            FillPlayerListFromConfig();
+            //FillPlayerListFromConfig();
         } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();
         }
@@ -68,7 +49,7 @@ public class PlayerManager {
     public static void saveConfig() {
     	try {
     		Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE + "Try to save Config");
-    		playerConfig.set("playerlist", playerList);
+    		//playerConfig.set("playerlist", playerList);
 			playerConfig.save(playerConfigFile);
     		Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE + "Config saved");
 		} catch (IOException e) {
@@ -77,12 +58,12 @@ public class PlayerManager {
     }
 	
     
-	@SuppressWarnings("unchecked")
-	static void FillPlayerListFromConfig() {
-		Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE+"try to parse playerlist in List");
-
-			playerList = (List<PlayerManager>) PlayerManager.getPlayerConfig().getList("playerlist");
-		}
+//	@SuppressWarnings("unchecked")
+//	static void FillPlayerListFromConfig() {
+//		Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE+"try to parse playerlist in List");
+//
+//			playerList = (List<PlayerManager>) PlayerManager.getPlayerConfig().getList("playerlist");
+//		}
 
 
 	public static String getPlayer(String UUID) { return playerConfig.getString("Player." + UUID); }
