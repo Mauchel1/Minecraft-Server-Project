@@ -68,55 +68,81 @@ public class PlayerManager {
 
 	public static String getPlayer(String UUID) { return playerConfig.getString("Player." + UUID); }
 	
-	public static double getAgilityXP(String UUID) { return playerConfig.getDouble("Player." + UUID + ".XP.Agility", 1.0); }
-	public static double getMiningXP(String UUID) { return playerConfig.getDouble("Player." + UUID + ".XP.Mining", 1.0); }
-	public static double getFarmingXP(String UUID) { return playerConfig.getDouble("Player." + UUID + ".XP.Farming", 1.0); }
-	public static double getWoodcuttingXP(String UUID) { return playerConfig.getDouble("Player." + UUID + ".XP.Woodcutting", 1.0); }
-	public static double getAlchemyXP(String UUID) { return playerConfig.getDouble("Player." + UUID + ".XP.Alchemy", 1.0); }
-	public static double getFishingXP(String UUID) { return playerConfig.getDouble("Player." + UUID + ".XP.Fishing", 1.0); }
-	public static double getDiggingXP(String UUID) { return playerConfig.getDouble("Player." + UUID + ".XP.Digging", 1.0); }
+//	public static double getAgilityXP(String UUID) { return playerConfig.getDouble("Player." + UUID + ".XP.Agility", 1.0); }
+//	public static double getMiningXP(String UUID) { return playerConfig.getDouble("Player." + UUID + ".XP.Mining", 1.0); }
+//	public static double getFarmingXP(String UUID) { return playerConfig.getDouble("Player." + UUID + ".XP.Farming", 1.0); }
+//	public static double getWoodcuttingXP(String UUID) { return playerConfig.getDouble("Player." + UUID + ".XP.Woodcutting", 1.0); }
+//	public static double getAlchemyXP(String UUID) { return playerConfig.getDouble("Player." + UUID + ".XP.Alchemy", 1.0); }
+//	public static double getFishingXP(String UUID) { return playerConfig.getDouble("Player." + UUID + ".XP.Fishing", 1.0); }
+//	public static double getDiggingXP(String UUID) { return playerConfig.getDouble("Player." + UUID + ".XP.Digging", 1.0); }
 	
-	public static int getAgilityLvl(String UUID) { return playerConfig.getInt("Player." + UUID + ".Lvl.Agility", 1); }
-	public static int getMiningLvl(String UUID) { return playerConfig.getInt("Player." + UUID + ".Lvl.Mining", 1); }
-	public static int getFarmingLvl(String UUID) { return playerConfig.getInt("Player." + UUID + ".Lvl.Farming", 1); }
-	public static int getWoodcuttingLvl(String UUID) { return playerConfig.getInt("Player." + UUID + ".Lvl.Woodcutting", 1); }
-	public static int getAlchemyLvl(String UUID) { return playerConfig.getInt("Player." + UUID + ".Lvl.Alchemy", 1); }
-	public static int getFishingLvl(String UUID) { return playerConfig.getInt("Player." + UUID + ".Lvl.Fishing", 1); }
-	public static int getDiggingLvl(String UUID) { return playerConfig.getInt("Player." + UUID + ".Lvl.Digging", 1); }
+	public static double getSkillXP(String UUID, String Skill) { return playerConfig.getDouble("Player." + UUID + ".XP." + Skill, 1.0); }
+	
+//	public static int getAgilityLvl(String UUID) { return playerConfig.getInt("Player." + UUID + ".Lvl.Agility", 1); }
+//	public static int getMiningLvl(String UUID) { return playerConfig.getInt("Player." + UUID + ".Lvl.Mining", 1); }
+//	public static int getFarmingLvl(String UUID) { return playerConfig.getInt("Player." + UUID + ".Lvl.Farming", 1); }
+//	public static int getWoodcuttingLvl(String UUID) { return playerConfig.getInt("Player." + UUID + ".Lvl.Woodcutting", 1); }
+//	public static int getAlchemyLvl(String UUID) { return playerConfig.getInt("Player." + UUID + ".Lvl.Alchemy", 1); }
+//	public static int getFishingLvl(String UUID) { return playerConfig.getInt("Player." + UUID + ".Lvl.Fishing", 1); }
+//	public static int getDiggingLvl(String UUID) { return playerConfig.getInt("Player." + UUID + ".Lvl.Digging", 1); }
 
-	public static void setAgilityXP(String UUID, double xp) {	playerConfig.set("Player." + UUID + ".XP.Agility", xp);	}
-	public static void setMiningXP(String UUID, double xp) {	playerConfig.set("Player." + UUID + ".XP.Mining", xp);	}
-	public static void setFarmingXP(String UUID, double xp) {	playerConfig.set("Player." + UUID + ".XP.Farming", xp);	}
-	public static void setWoodcuttingXP(String UUID, double xp) { playerConfig.set("Player." + UUID + ".XP.Woodcutting", xp);	}
-	public static void setAlchemyXP(String UUID, double xp) {	playerConfig.set("Player." + UUID + ".XP.Alchemy", xp);	}
-	public static void setFishingXP(String UUID, double xp) {	playerConfig.set("Player." + UUID + ".XP.Fishing", xp);	}
-	public static void setDiggingXP(String UUID, double xp) {	playerConfig.set("Player." + UUID + ".XP.Digging", xp);	}
+	public static double getSkillLvl(String UUID, String Skill) { return playerConfig.getDouble("Player." + UUID + ".Lvl." + Skill, 1); }
 	
-	public static void setAgilityLvl(String UUID, int lvl) {	playerConfig.set("Player." + UUID + ".Lvl.Agility", lvl);	}
-	public static void setMiningLvl(String UUID, int lvl) {	playerConfig.set("Player." + UUID + ".Lvl.Mining", lvl);	}
-	public static void setFarmingLvl(String UUID, int lvl) {	playerConfig.set("Player." + UUID + ".Lvl.Farming", lvl);	}
-	public static void setWoodcuttingLvl(String UUID, int lvl) { playerConfig.set("Player." + UUID + ".Lvl.Woodcutting", lvl);	}
-	public static void setAlchemyLvl(String UUID, int lvl) {	playerConfig.set("Player." + UUID + ".Lvl.Alchemy", lvl);	}
-	public static void setFishingLvl(String UUID, int lvl) {	playerConfig.set("Player." + UUID + ".Lvl.Fishing", lvl);	}
-	public static void setDiggingLvl(String UUID, int lvl) {	playerConfig.set("Player." + UUID + ".Lvl.Digging", lvl);	}
+//	public static void setAgilityXP(String UUID, double xp) {	playerConfig.set("Player." + UUID + ".XP.Agility", xp);	}
+//	public static void setMiningXP(String UUID, double xp) {	playerConfig.set("Player." + UUID + ".XP.Mining", xp);	}
+//	public static void setFarmingXP(String UUID, double xp) {	playerConfig.set("Player." + UUID + ".XP.Farming", xp);	}
+//	public static void setWoodcuttingXP(String UUID, double xp) { playerConfig.set("Player." + UUID + ".XP.Woodcutting", xp);	}
+//	public static void setAlchemyXP(String UUID, double xp) {	playerConfig.set("Player." + UUID + ".XP.Alchemy", xp);	}
+//	public static void setFishingXP(String UUID, double xp) {	playerConfig.set("Player." + UUID + ".XP.Fishing", xp);	}
+//	public static void setDiggingXP(String UUID, double xp) {	playerConfig.set("Player." + UUID + ".XP.Digging", xp);	}
+	
+	public static double setSkillXP(String UUID, String Skill, double xp) { return playerConfig.getDouble("Player." + UUID + ".XP." + Skill, xp); }
+	
+//	public static void setAgilityLvl(String UUID, int lvl) {	playerConfig.set("Player." + UUID + ".Lvl.Agility", lvl);	}
+//	public static void setMiningLvl(String UUID, int lvl) {	playerConfig.set("Player." + UUID + ".Lvl.Mining", lvl);	}
+//	public static void setFarmingLvl(String UUID, int lvl) {	playerConfig.set("Player." + UUID + ".Lvl.Farming", lvl);	}
+//	public static void setWoodcuttingLvl(String UUID, int lvl) { playerConfig.set("Player." + UUID + ".Lvl.Woodcutting", lvl);	}
+//	public static void setAlchemyLvl(String UUID, int lvl) {	playerConfig.set("Player." + UUID + ".Lvl.Alchemy", lvl);	}
+//	public static void setFishingLvl(String UUID, int lvl) {	playerConfig.set("Player." + UUID + ".Lvl.Fishing", lvl);	}
+//	public static void setDiggingLvl(String UUID, int lvl) {	playerConfig.set("Player." + UUID + ".Lvl.Digging", lvl);	}
+
+	public static double setSkillLvl(String UUID, String Skill, int lvl) { return playerConfig.getDouble("Player." + UUID + ".Lvl." + Skill, lvl); }
 
 	public static void initNewPlayer(String UUID) 
 	{
-		setAgilityXP(UUID, 1.0);
-		setMiningXP(UUID, 1.0);
-		setFarmingXP(UUID, 1.0);
-		setWoodcuttingXP(UUID, 1.0);
-		setAlchemyXP(UUID, 1.0);
-		setFishingXP(UUID, 1.0);
-		setDiggingXP(UUID, 1.0);
 		
-		setAgilityLvl(UUID, 1);
-		setMiningLvl(UUID, 1);
-		setFarmingLvl(UUID, 1);
-		setWoodcuttingLvl(UUID, 1);
-		setAlchemyLvl(UUID, 1);
-		setFishingLvl(UUID, 1);		
-		setDiggingLvl(UUID, 1);		
+		setSkillXP(UUID, "Agility", 1.0);
+		setSkillXP(UUID, "Mining", 1.0);
+		setSkillXP(UUID, "Farming", 1.0);
+		setSkillXP(UUID, "Woodcutting", 1.0);
+		setSkillXP(UUID, "Alchemy", 1.0);
+		setSkillXP(UUID, "Fishing", 1.0);
+		setSkillXP(UUID, "Digging", 1.0);
+		
+		
+//		setAgilityXP(UUID, 1.0);
+//		setMiningXP(UUID, 1.0);
+//		setFarmingXP(UUID, 1.0);
+//		setWoodcuttingXP(UUID, 1.0);
+//		setAlchemyXP(UUID, 1.0);
+//		setFishingXP(UUID, 1.0);
+//		setDiggingXP(UUID, 1.0);
+		
+		setSkillLvl(UUID, "Agility", 1);
+		setSkillLvl(UUID, "Mining", 1);
+		setSkillLvl(UUID, "Farming", 1);
+		setSkillLvl(UUID, "Woodcutting", 1);
+		setSkillLvl(UUID, "Alchemy", 1);
+		setSkillLvl(UUID, "Fishing", 1);
+		setSkillLvl(UUID, "Digging", 1);
+
+//		setAgilityLvl(UUID, 1);
+//		setMiningLvl(UUID, 1);
+//		setFarmingLvl(UUID, 1);
+//		setWoodcuttingLvl(UUID, 1);
+//		setAlchemyLvl(UUID, 1);
+//		setFishingLvl(UUID, 1);		
+//		setDiggingLvl(UUID, 1);		
 		
 		Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE+"Playerconfig Entitys Created for Player " + UUID);
 

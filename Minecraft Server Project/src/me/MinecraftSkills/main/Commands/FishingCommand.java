@@ -16,7 +16,7 @@ protected static final main plugin = main.p;
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
-            sender.sendMessage("Du hast " + PlayerManager.getFishingXP(((Player) sender).getUniqueId().toString()) + " XP in Level " + PlayerManager.getFishingLvl(((Player) sender).getUniqueId().toString()));
+            sender.sendMessage("Du hast " + PlayerManager.getSkillXP(((Player) sender).getUniqueId().toString(), "Fishing") + " XP in Level " + PlayerManager.getSkillLvl(((Player) sender).getUniqueId().toString(), "Fishing"));
 
         }
 
