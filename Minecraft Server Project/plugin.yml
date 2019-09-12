@@ -22,4 +22,7 @@ commands:
   skill_woodcutting:
     description: Zeigt die Woodcutting Fertigkeiten
     usage: /skill_woodcutting
+  skill_digging:
+    description: Zeigt die Grabungs Fertigkeiten
+    usage: /skill_digging
     
