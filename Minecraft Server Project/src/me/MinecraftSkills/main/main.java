@@ -56,6 +56,28 @@ public class main extends JavaPlugin implements Listener{
     	
     }
     
+    public static String convertName(String inputstring) 
+    {
+    	String output = "";
+    	String[] substrings = inputstring.split("_");
+
+    	int size = 1;
+    	for (String s : substrings) 
+    	{
+    		
+    		output = output.concat(s.substring(0, 1).toUpperCase());
+    	    output = output.concat(s.substring(1).toLowerCase());
+            if (size < substrings.length) {
+                output = output.concat("_");
+            }
+
+            size++;
+
+    	}
+    	
+    	return output;
+    }
+    
 //	@EventHandler
 //	public void onPlayerJoin(PlayerJoinEvent event) 
 //	{
