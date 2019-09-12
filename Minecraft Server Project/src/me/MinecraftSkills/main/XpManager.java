@@ -50,4 +50,11 @@ public class XpManager {
 		}
     }
     
+	public static int getSkillXP(String Skill, String Block) { 
+		//Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE + "Try to get Xp for: " + Skill + "." + main.convertName(Block));
+		
+		return xpConfig.getInt(Skill + "." + main.convertName(Block)); 
+	}
+
+    
 }
