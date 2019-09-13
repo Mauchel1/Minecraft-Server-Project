@@ -1,6 +1,6 @@
 Multiplier:
-  base: 1020
-  multi: 20
+  Base: 1020
+  Multi: 20
 Agility:
   Dodge: 120
   Roll: 80

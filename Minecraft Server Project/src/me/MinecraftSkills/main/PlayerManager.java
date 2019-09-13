@@ -57,7 +57,7 @@ public class PlayerManager {
 	
 	public static double getSkillXP(String UUID, String Skill) { return playerConfig.getDouble("Player." + UUID + ".XP." + Skill, 1.0); }
 	
-	public static double getSkillLvl(String UUID, String Skill) { return playerConfig.getDouble("Player." + UUID + ".Lvl." + Skill, 1); }
+	public static int getSkillLvl(String UUID, String Skill) { return playerConfig.getInt("Player." + UUID + ".Lvl." + Skill, 1); }
 	
 	public static void setSkillXP(String UUID, String Skill, double xp) { playerConfig.set("Player." + UUID + ".XP." + Skill, xp); }
 	
@@ -65,7 +65,22 @@ public class PlayerManager {
 
 	public static void addSkillXP(String UUID, String Skill, int xp) 
 	{
+		int lvl = getSkillLvl(UUID, Skill);
+		int expNeededLvlUp = 10*(lvl+lvl+1+101);
+		//int expNeededTotal = 10*(lvl+1)*(101+(lvl+1));
+		
 		setSkillXP(UUID, Skill, xp + getSkillXP(UUID, Skill));	
+		
+		//Level Up!
+		if (getSkillXP(UUID, Skill) >= expNeededLvlUp) 
+		{
+			setSkillXP(UUID, Skill, getSkillXP(UUID, Skill) - expNeededLvlUp);
+			setSkillLvl(UUID, Skill, getSkillLvl(UUID, Skill) +1);
+			Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE+"Player Leveled Up!");
+
+			//10*L*(101+L);
+		}
+		
 		Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE+"Player now have xP: " + getSkillXP(UUID, Skill));
 	}
 	
