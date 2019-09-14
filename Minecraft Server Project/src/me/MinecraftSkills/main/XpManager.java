@@ -21,11 +21,11 @@ public class XpManager {
 
     
     public static void loadConfig() {
-		Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE + "loadConfig()");
+		Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE + "loadConfig(xpConfig)");
 		xpConfigFile = new File(plugin.getDataFolder(), "xpconfig.yml");
         if (!xpConfigFile.exists()) {
         	xpConfigFile.getParentFile().mkdirs();
-    		Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE + "SaveConfig()");
+    		Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE + "SaveConfig(xpConfig)");
             plugin.saveResource("xpconfig.yml", false);
          }
 
@@ -42,9 +42,9 @@ public class XpManager {
 
     public static void saveConfig() {
     	try {
-    		Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE + "Try to save Config");
+    		Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE + "Try to save xpconfig");
     		xpConfig.save(xpConfigFile);
-    		Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE + "Config saved");
+    		Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE + "xpconfig saved");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

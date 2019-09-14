@@ -24,17 +24,17 @@ public class PlayerManager {
     }
 	
     public static void loadConfig() {
-		Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE + "loadConfig()");
+		Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE + "loadConfig(playerconfig)");
         playerConfigFile = new File(plugin.getDataFolder(), "playerconfig.yml");
         if (!playerConfigFile.exists()) {
             playerConfigFile.getParentFile().mkdirs();
-    		Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE + "SaveConfig()");
+    		Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE + "SaveConfig(playerconfig)");
             plugin.saveResource("playerconfig.yml", false);
          }
 
         playerConfig = new YamlConfiguration();
         try {
-    		Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE + "try to load configfile");
+    		Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE + "try to load playerconfigfile");
 
             playerConfig.load(playerConfigFile);
         } catch (IOException | InvalidConfigurationException e) {
@@ -44,9 +44,9 @@ public class PlayerManager {
 
     public static void saveConfig() {
     	try {
-    		Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE + "Try to save Config");
+    		Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE + "Try to save playerconfig");
 			playerConfig.save(playerConfigFile);
-    		Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE + "Config saved");
+    		Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE + "playerconfig saved");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
