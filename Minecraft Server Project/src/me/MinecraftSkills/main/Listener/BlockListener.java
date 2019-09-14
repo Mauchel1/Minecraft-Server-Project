@@ -2,6 +2,7 @@ package me.MinecraftSkills.main.Listener;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.block.data.Ageable;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
@@ -31,13 +32,36 @@ public class BlockListener implements Listener
 		
 		if (XpManager.getSkillXP("Farming", event.getBlock().getType().name()) != 0) 
 		{
+			//Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE+ event.getBlock().getType().name());
+            if (event.getBlock().getBlockData() instanceof Ageable) 
+            {
+    			//Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE+"IsAgeable");
+
+                Ageable ageData = (Ageable) event.getBlock().getBlockData();
+                
+                //Cactus + SugarCane dont work with "Age", you may have multiple drops
+                if (ageData.getMaterial().name() == "CACTUS" || ageData.getMaterial().name() == "SUGAR_CANE") 
+                {
+                	//TODO doppelte drops abfangen
+        			PlayerManager.addSkillXP(event.getPlayer().getUniqueId().toString(), "Farming", XpManager.getSkillXP("Farming", event.getBlock().getType().name()) );
+        			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + " Drecks SugarCane oder Caktus -.- ");
+                }
+                //Only full grown plants give XP
+                else if (ageData.getAge() == ageData.getMaximumAge()) 
+                {
+        			PlayerManager.addSkillXP(event.getPlayer().getUniqueId().toString(), "Farming", XpManager.getSkillXP("Farming", event.getBlock().getType().name()) );
+                }
+            }
+            else
+            {
 			PlayerManager.addSkillXP(event.getPlayer().getUniqueId().toString(), "Farming", XpManager.getSkillXP("Farming", event.getBlock().getType().name()) );
 			//Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "Block Event: Block found, XP: " + XpManager.getSkillXP("Mining", event.getBlock().getType().name()  ));
+            }
 		}
 
 		//Digging
 		
-		Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "Block Event: " + event.getBlock().getType() + " from Player " + event.getPlayer().getUniqueId());
+		//Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "Block Event: " + event.getBlock().getType() + " from Player " + event.getPlayer().getUniqueId());
 		
 		if (XpManager.getSkillXP("Digging", event.getBlock().getType().name()) != 0) 
 		{

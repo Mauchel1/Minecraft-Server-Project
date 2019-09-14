@@ -76,14 +76,14 @@ public class PlayerManager {
 		{
 			setSkillXP(UUID, Skill, getSkillXP(UUID, Skill) - expNeededLvlUp);
 			setSkillLvl(UUID, Skill, getSkillLvl(UUID, Skill) +1);
-			Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE+"Player Leveled Up Skill " + Skill);
+			Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE+ Bukkit.getPlayer(java.util.UUID.fromString(UUID)).getName() + " Leveled Up Skill " + Skill);
 			
     		Bukkit.getPlayer(java.util.UUID.fromString(UUID)).sendMessage("Glückwunsch! " + Skill + " Level Up!");
 
 			//10*L*(101+L);
 		}
 		
-		Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE+"Player now have xP: " + getSkillXP(UUID, Skill));
+		Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE + Bukkit.getPlayer(java.util.UUID.fromString(UUID)).getName() + " now have " + getSkillXP(UUID, Skill) +" XP in " + Skill) ;
 	}
 	
 	public static void initNewPlayer(String UUID) 
