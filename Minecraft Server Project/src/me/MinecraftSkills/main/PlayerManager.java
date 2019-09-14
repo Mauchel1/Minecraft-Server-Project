@@ -96,6 +96,11 @@ public class PlayerManager {
 		setSkillXP(UUID, "Alchemy", 1.0);
 		setSkillXP(UUID, "Fishing", 1.0);
 		setSkillXP(UUID, "Digging", 1.0);
+		setSkillXP(UUID, "Sword", 1.0);
+		setSkillXP(UUID, "Axe", 1.0);
+		setSkillXP(UUID, "Fist", 1.0);
+		setSkillXP(UUID, "Bow", 1.0);
+		setSkillXP(UUID, "Crossbow", 1.0);
 		
 		setSkillLvl(UUID, "Agility", 1);
 		setSkillLvl(UUID, "Mining", 1);
@@ -104,6 +109,11 @@ public class PlayerManager {
 		setSkillLvl(UUID, "Alchemy", 1);
 		setSkillLvl(UUID, "Fishing", 1);
 		setSkillLvl(UUID, "Digging", 1);
+		setSkillLvl(UUID, "Sword", 1);
+		setSkillLvl(UUID, "Axe", 1);
+		setSkillLvl(UUID, "Fist", 1);
+		setSkillLvl(UUID, "Bow", 1);
+		setSkillLvl(UUID, "Crossbow", 1);
 
 		Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE+"Playerconfig Entitys Created for Player " + UUID);
 

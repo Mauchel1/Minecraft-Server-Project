@@ -25,4 +25,18 @@ commands:
   skill_digging:
     description: Zeigt die Grabungs Fertigkeiten
     usage: /skill_digging
-    
+  skill_sword:
+    description: Zeigt die Schwert Fertigkeiten
+    usage: /skill_sword
+  skill_axe:
+    description: Zeigt die Axt Fertigkeiten
+    usage: /skill_axe
+  skill_fist:
+    description: Zeigt die Faust Fertigkeiten
+    usage: /skill_fist
+  skill_bow:
+    description: Zeigt die Bogen Fertigkeiten
+    usage: /skill_bow
+  skill_crossbow:
+    description: Zeigt die Armbrust Fertigkeiten
+    usage: /skill_crossbow

@@ -48,6 +48,11 @@ public class main extends JavaPlugin implements Listener{
     	this.getCommand("skill_agility").setExecutor(new FishingCommand());
     	this.getCommand("skill_agility").setExecutor(new WoodcuttingCommand());
     	this.getCommand("skill_digging").setExecutor(new DiggingCommand());
+    	this.getCommand("skill_sword").setExecutor(new SwordCommand());
+    	this.getCommand("skill_axe").setExecutor(new AxeCommand());
+    	this.getCommand("skill_fist").setExecutor(new FistCommand());
+    	this.getCommand("skill_bow").setExecutor(new BowCommand());
+    	this.getCommand("skill_crossbow").setExecutor(new CrossbowCommand());
     }
     
     private void registerEvents()
