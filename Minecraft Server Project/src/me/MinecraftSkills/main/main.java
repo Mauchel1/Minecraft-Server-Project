@@ -56,11 +56,11 @@ public class main extends JavaPlugin implements Listener{
     }
     
     private void registerEvents()
-    {   
+    {
     	Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), this);
     	Bukkit.getPluginManager().registerEvents(new BlockListener(), this);
-    	//Bukkit.getPluginManager().registerEvents(this, this);
-    	
+    	Bukkit.getPluginManager().registerEvents(new FishingListener(), this);
+    	//Bukkit.getPluginManager().registerEvents(this, this);	
     }
     
     public static String convertName(String inputstring) 

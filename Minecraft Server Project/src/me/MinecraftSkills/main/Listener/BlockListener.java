@@ -20,6 +20,7 @@ public class BlockListener implements Listener
 		//Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "Block Event: " + event.getBlock() + " from Player " + event.getPlayer());
 
 		//Bukkit.getPlayer(java.util.UUID.fromString(event.getPlayer().getUniqueId().toString())).sendMessage("TESTMESSAGE: Glückwunsch! Level Up!");
+		
 		//Mining
 		
 		if (XpManager.getSkillXP("Mining", event.getBlock().getType().name()) != 0) 
