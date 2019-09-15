@@ -60,6 +60,7 @@ public class main extends JavaPlugin implements Listener{
     	Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), this);
     	Bukkit.getPluginManager().registerEvents(new BlockListener(), this);
     	Bukkit.getPluginManager().registerEvents(new FishingListener(), this);
+    	Bukkit.getPluginManager().registerEvents(new DamageListener(), this);
     	//Bukkit.getPluginManager().registerEvents(this, this);	
     }
     

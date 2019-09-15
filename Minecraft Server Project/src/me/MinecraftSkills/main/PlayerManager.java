@@ -63,7 +63,7 @@ public class PlayerManager {
 	
 	public static void setSkillLvl(String UUID, String Skill, int lvl) { playerConfig.set("Player." + UUID + ".Lvl." + Skill, lvl); }
 
-	public static void addSkillXP(String UUID, String Skill, int xp) 
+	public static void addSkillXP(String UUID, String Skill, double xp) 
 	{
 		int lvl = getSkillLvl(UUID, Skill);
 		int expNeededLvlUp = 10*(lvl+lvl+1+101);
