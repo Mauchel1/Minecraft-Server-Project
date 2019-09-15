@@ -1,5 +1,7 @@
 package me.MinecraftSkills.main.Listener;
 
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
@@ -32,12 +34,13 @@ public class DamageListener implements Listener
 				//Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "Damage Event item: " + player.getInventory().getItemInMainHand().getType()  + " from " + player.getName() + " Damage: " + event.getFinalDamage());
 				
 				//Bow
+				//Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "DistanceProjectile: " + player.getLocation().distance(event.getEntity().getLocation()));
 				
 				if(player.getInventory().getItemInMainHand().getType() == Material.BOW) 
 				{
 					if (XpManager.getSkillXP("Combat", event.getEntity().getType().toString()) != 0) 
 					{
-						PlayerManager.addSkillXP(player.getUniqueId().toString(), "Bow", event.getFinalDamage() * XpManager.getSkillXP("Combat", event.getEntity().getType().toString()) );
+						PlayerManager.addSkillXP(player.getUniqueId().toString(), "Bow", (1 + player.getLocation().distance(event.getEntity().getLocation()) * 0.03) * event.getFinalDamage() * XpManager.getSkillXP("Combat", event.getEntity().getType().toString()) );
 						//Bukkit.getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "Damage Event, XP: " + XpManager.getSkillXP("Combat", event.getEntity().getType().toString()  ));
 					}
 				}
@@ -48,7 +51,7 @@ public class DamageListener implements Listener
 				{
 					if (XpManager.getSkillXP("Combat", event.getEntity().getType().toString()) != 0) 
 					{
-						PlayerManager.addSkillXP(player.getUniqueId().toString(), "Crossbow", event.getFinalDamage() * XpManager.getSkillXP("Combat", event.getEntity().getType().toString()) );
+						PlayerManager.addSkillXP(player.getUniqueId().toString(), "Crossbow", (1 + player.getLocation().distance(event.getEntity().getLocation()) * 0.03) * event.getFinalDamage() * XpManager.getSkillXP("Combat", event.getEntity().getType().toString()) );
 						//Bukkit.getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "Damage Event, XP: " + XpManager.getSkillXP("Combat", event.getEntity().getType().toString()  ));
 					}
 				}
