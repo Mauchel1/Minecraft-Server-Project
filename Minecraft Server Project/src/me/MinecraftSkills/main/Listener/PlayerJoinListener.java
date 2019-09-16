@@ -1,12 +1,12 @@
 package me.MinecraftSkills.main.Listener;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import me.MinecraftSkills.main.PlayerManager;
+import me.MinecraftSkills.main.main;
 
 
 public class PlayerJoinListener implements Listener
@@ -20,7 +20,7 @@ public class PlayerJoinListener implements Listener
 		
 		if (PlayerManager.getPlayer(event.getPlayer().getUniqueId().toString()) == null) 
 		{
-			Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE + "Player with ID " + event.getPlayer().getUniqueId().toString() + " not found");
+			main.ConsoleMsg(ChatColor.BLUE , "Player with ID " + event.getPlayer().getUniqueId().toString() + " not found");
 			PlayerManager.initNewPlayer(event.getPlayer().getUniqueId().toString());
 		}
 	}

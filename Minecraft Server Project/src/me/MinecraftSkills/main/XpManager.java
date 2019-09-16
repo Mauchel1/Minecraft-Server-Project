@@ -21,17 +21,17 @@ public class XpManager {
 
     
     public static void loadConfig() {
-		Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE + "loadConfig(xpConfig)");
+		main.ConsoleMsg(ChatColor.BLUE , "loadConfig(xpConfig)");
 		xpConfigFile = new File(plugin.getDataFolder(), "xpconfig.yml");
         if (!xpConfigFile.exists()) {
         	xpConfigFile.getParentFile().mkdirs();
-    		Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE + "SaveConfig(xpConfig)");
+    		main.ConsoleMsg(ChatColor.BLUE , "SaveConfig(xpConfig)");
             plugin.saveResource("xpconfig.yml", false);
          }
 
         xpConfig = new YamlConfiguration();
         try {
-    		Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE + "try to load configfile");
+    		main.ConsoleMsg(ChatColor.BLUE , "try to load configfile");
 
     		xpConfig.load(xpConfigFile);
             //FillPlayerListFromConfig();
@@ -42,16 +42,16 @@ public class XpManager {
 
     public static void saveConfig() {
     	try {
-    		Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE + "Try to save xpconfig");
+    		main.ConsoleMsg(ChatColor.BLUE , "Try to save xpconfig");
     		xpConfig.save(xpConfigFile);
-    		Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE + "xpconfig saved");
+    		main.ConsoleMsg(ChatColor.BLUE , "xpconfig saved");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
     }
     
 	public static int getSkillXP(String Skill, String Block) { 
-		//Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE + "Try to get Xp for: " + Skill + "." + main.convertName(Block));
+		//main.ConsoleMsg(ChatColor.BLUE , "Try to get Xp for: " + Skill + "." + main.convertName(Block));
 		
 		return xpConfig.getInt(Skill + "." + main.convertName(Block)); 
 	}

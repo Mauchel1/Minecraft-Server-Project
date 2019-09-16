@@ -13,6 +13,7 @@ public class main extends JavaPlugin implements Listener{
 
     
 	public static main p;
+	private static String preString = ChatColor.BLUE + "[Minecraft" + ChatColor.DARK_GREEN + "Skills] ";
 	
 	// Fired when plugin is first enabled
     @Override
@@ -25,7 +26,7 @@ public class main extends JavaPlugin implements Listener{
     	
     	//Bukkit.getOperators().add(Bukkit.getPlayer(java.util.UUID.fromString("7bb92f59-e507-4e69-a08c-373e6dcff48a")));    
     	
-    	Bukkit.getConsoleSender().sendMessage(ChatColor.RED+"Plugin MinecraftSkills gestartet");
+    	ConsoleMsg(ChatColor.RED, "Plugin MinecraftSkills gestartet");
     	//System.out.println("Plugin MinecraftSkills gestartet");
     }
     
@@ -34,8 +35,8 @@ public class main extends JavaPlugin implements Listener{
     public void onDisable() {
     	PlayerManager.saveConfig();
     	XpManager.saveConfig();
-    	System.out.println("Plugin MinecraftSkills gestoppt");
-    	//Bukkit.getConsoleSender().sendMessage(ChatColor.RED+"Plugin MinecraftSkills gestoppt");
+    	//System.out.println("Plugin MinecraftSkills gestoppt");
+    	ConsoleMsg(ChatColor.RED, "Plugin MinecraftSkills gestoppt");
     	
     }
     
@@ -87,28 +88,11 @@ public class main extends JavaPlugin implements Listener{
     	return output;
     }
     
-//	@EventHandler
-//	public void onPlayerJoin(PlayerJoinEvent event) 
-//	{
-//		Bukkit.broadcastMessage("Moin du Hobelschlonze" );
-//		boolean found = false;
-//		for (PlayerManager player : PlayerManager.playerList) {
-//			if (player.uuid.equals(event.getPlayer().getUniqueId().toString())) {
-//				Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE+"Beigetretener Spieler bereits geladen");
-//				found = true;
-//				break;
-//			}
-//		}
-//		if (!found) {
-//			Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE+"Beigetretener Spieler Config geschrieben");
-//			PlayerManager.getPlayerConfig().set("player", event.getPlayer().getUniqueId().toString());
-//			//Player p = new Player(event.getPlayer().getUniqueId().toString());
-//			//Player.playerList.add(p);
-//			
-//		}
-//		
-//		
-//	}
-	
+    public static void ConsoleMsg(ChatColor color, String msg) 
+    {
+    	
+		Bukkit.getConsoleSender().sendMessage(preString + color + msg);
+
+    }	
 	
 }

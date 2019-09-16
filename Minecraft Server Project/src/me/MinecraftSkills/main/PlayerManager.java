@@ -24,17 +24,17 @@ public class PlayerManager {
     }
 	
     public static void loadConfig() {
-		Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE + "loadConfig(playerconfig)");
+		main.ConsoleMsg(ChatColor.BLUE , "loadConfig(playerconfig)");
         playerConfigFile = new File(plugin.getDataFolder(), "playerconfig.yml");
         if (!playerConfigFile.exists()) {
             playerConfigFile.getParentFile().mkdirs();
-    		Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE + "SaveConfig(playerconfig)");
+    		main.ConsoleMsg(ChatColor.BLUE , "SaveConfig(playerconfig)");
             plugin.saveResource("playerconfig.yml", false);
          }
 
         playerConfig = new YamlConfiguration();
         try {
-    		Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE + "try to load playerconfigfile");
+    		main.ConsoleMsg(ChatColor.BLUE , "try to load playerconfigfile");
 
             playerConfig.load(playerConfigFile);
         } catch (IOException | InvalidConfigurationException e) {
@@ -44,9 +44,9 @@ public class PlayerManager {
 
     public static void saveConfig() {
     	try {
-    		Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE + "Try to save playerconfig");
+    		main.ConsoleMsg(ChatColor.BLUE , "Try to save playerconfig");
 			playerConfig.save(playerConfigFile);
-    		Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE + "playerconfig saved");
+    		main.ConsoleMsg(ChatColor.BLUE , "playerconfig saved");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -76,14 +76,14 @@ public class PlayerManager {
 		{
 			setSkillXP(UUID, Skill, getSkillXP(UUID, Skill) - expNeededLvlUp);
 			setSkillLvl(UUID, Skill, getSkillLvl(UUID, Skill) +1);
-			Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE+ Bukkit.getPlayer(java.util.UUID.fromString(UUID)).getName() + " Leveled Up Skill " + Skill);
+			main.ConsoleMsg(ChatColor.BLUE , Bukkit.getPlayer(java.util.UUID.fromString(UUID)).getName() + " Leveled Up Skill " + Skill);
 			
     		Bukkit.getPlayer(java.util.UUID.fromString(UUID)).sendMessage("Glückwunsch! " + Skill + " Level Up!");
 
 			//10*L*(101+L);
 		}
 		
-		Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE + Bukkit.getPlayer(java.util.UUID.fromString(UUID)).getName() + " now have " + getSkillXP(UUID, Skill) +" XP in " + Skill) ;
+		main.ConsoleMsg(ChatColor.BLUE , Bukkit.getPlayer(java.util.UUID.fromString(UUID)).getName() + " now have " + getSkillXP(UUID, Skill) +" XP in " + Skill) ;
 	}
 	
 	public static void initNewPlayer(String UUID) 
@@ -115,7 +115,7 @@ public class PlayerManager {
 		setSkillLvl(UUID, "Bow", 1);
 		setSkillLvl(UUID, "Crossbow", 1);
 
-		Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE+"Playerconfig Entitys Created for Player " + UUID);
+		main.ConsoleMsg(ChatColor.BLUE , "Playerconfig Entitys Created for Player " + UUID);
 
 	}
 	

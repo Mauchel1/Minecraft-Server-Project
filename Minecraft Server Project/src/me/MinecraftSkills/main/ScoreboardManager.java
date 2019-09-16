@@ -38,7 +38,7 @@ public class ScoreboardManager {
 		o.getScore(ChatColor.DARK_RED + "Schwert").setScore(PlayerManager.getSkillLvl(player.getUniqueId().toString(), "Sword"));
 
 		player.setScoreboard(sb);
-		Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW + "ScoreboardManager: " + "Scoreboard opened");
+		main.ConsoleMsg(ChatColor.YELLOW , "ScoreboardManager: " + "Scoreboard opened");
 
 		
 		timer.schedule(new TaskSwitchScoreboardOff(o), 10000);
@@ -67,7 +67,7 @@ public class ScoreboardManager {
 		o.getScore(ChatColor.DARK_RED + "Schwert").setScore((int) PlayerManager.getSkillXP(player.getUniqueId().toString(), "Sword"));
 
 		player.setScoreboard(sb);
-		Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW + "ScoreboardManager: " + "Scoreboard opened");
+		main.ConsoleMsg(ChatColor.YELLOW , "ScoreboardManager: " + "Scoreboard opened");
 
 		timer.schedule(new TaskSwitchScoreboardOff(o), 10000);
 	}
@@ -90,7 +90,7 @@ class TaskSwitchScoreboardOff extends TimerTask
 		
 		//sb.clearSlot(DisplaySlot.SIDEBAR);
 		o.unregister();
-		Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW + "ScoreboardManager: " + "Scoreboard closed");
+		main.ConsoleMsg(ChatColor.YELLOW , "ScoreboardManager: " + "Scoreboard closed");
 	}
 	
 }
