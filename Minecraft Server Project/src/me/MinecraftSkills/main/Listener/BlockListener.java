@@ -7,6 +7,7 @@ import org.bukkit.event.Listener;
 
 import org.bukkit.event.block.*;
 
+import Skills.WoodcuttingManager;
 import me.MinecraftSkills.main.PlayerManager;
 import me.MinecraftSkills.main.XpManager;
 import me.MinecraftSkills.main.main;
@@ -77,6 +78,10 @@ public class BlockListener implements Listener
 		{
 			PlayerManager.addSkillXP(event.getPlayer().getUniqueId().toString(), "Woodcutting", XpManager.getSkillXP("Woodcutting", event.getBlock().getType().name()) );
 			//main.ConsoleMsg(ChatColor.AQUA , "Block Event: Block found, XP: " + XpManager.getSkillXP("Woodcutting", event.getBlock().getType().name()  ));
+			if (WoodcuttingManager.isSuperAxeInUse(event.getPlayer().getUniqueId().toString())) 
+			{
+				WoodcuttingManager.cutDownTree(event.getPlayer().getUniqueId().toString(), event.getBlock());
+			}
 		}
 
 	}

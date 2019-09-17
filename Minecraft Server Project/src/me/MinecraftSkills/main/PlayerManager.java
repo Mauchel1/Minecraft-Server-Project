@@ -83,7 +83,7 @@ public class PlayerManager {
 			//10*L*(101+L);
 		}
 		
-		main.ConsoleMsg(ChatColor.BLUE , Bukkit.getPlayer(java.util.UUID.fromString(UUID)).getName() + " now have " + getSkillXP(UUID, Skill) +" XP in " + Skill) ;
+		//main.ConsoleMsg(ChatColor.BLUE , Bukkit.getPlayer(java.util.UUID.fromString(UUID)).getName() + " now have " + getSkillXP(UUID, Skill) +" XP in " + Skill) ;
 	}
 	
 	public static void initNewPlayer(String UUID) 
