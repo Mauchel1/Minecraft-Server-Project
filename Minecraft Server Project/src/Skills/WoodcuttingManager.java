@@ -70,10 +70,11 @@ public class WoodcuttingManager {
 		{
 
 			// Catch maximum Treesize
-			if (overflow > 200) //TODO parametrisieren
+			if (overflow > 500) //TODO parametrisieren
 			{
 				break;
 			}
+			
 			Block block = ToCheckBlocks.get(0);
 			if (block.getType()  == initblock.getType()) 
 			{
@@ -89,7 +90,22 @@ public class WoodcuttingManager {
 				adjacentBlocks.add(block.getLocation().add(-1,0,0).getBlock());
 				adjacentBlocks.add(block.getLocation().add(0,0,1).getBlock());
 				adjacentBlocks.add(block.getLocation().add(0,0,-1).getBlock());
-				
+
+				adjacentBlocks.add(block.getLocation().add(1,0,1).getBlock());
+				adjacentBlocks.add(block.getLocation().add(-1,0,1).getBlock());
+				adjacentBlocks.add(block.getLocation().add(1,0,-1).getBlock());
+				adjacentBlocks.add(block.getLocation().add(-1,0,-1).getBlock());
+
+				adjacentBlocks.add(block.getLocation().add(1,1,0).getBlock());
+				adjacentBlocks.add(block.getLocation().add(0,1,1).getBlock());
+				adjacentBlocks.add(block.getLocation().add(-1,1,0).getBlock());
+				adjacentBlocks.add(block.getLocation().add(0,1,-1).getBlock());
+
+				adjacentBlocks.add(block.getLocation().add(1,1,1).getBlock());
+				adjacentBlocks.add(block.getLocation().add(-1,1,1).getBlock());
+				adjacentBlocks.add(block.getLocation().add(1,1,-1).getBlock());
+				adjacentBlocks.add(block.getLocation().add(-1,1,-1).getBlock());
+
 				for (Block adjacentBlock : adjacentBlocks) 
 				{
 					if (!CheckedBlocks.contains(adjacentBlock) && !ToCheckBlocks.contains(adjacentBlock)) 
@@ -98,11 +114,12 @@ public class WoodcuttingManager {
 					}
 				}
 				adjacentBlocks.clear();
+				overflow++;
+
 			}
 			
 			CheckedBlocks.add(block);
 			ToCheckBlocks.remove(block);
-			overflow++;
 		}
 		
 		main.ConsoleMsg(ChatColor.DARK_GREEN , "WoodcuttingManager: " + FoundBlocks.size() + " Blocks found. Cutting them down now");

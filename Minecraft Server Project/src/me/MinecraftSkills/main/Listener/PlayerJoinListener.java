@@ -16,7 +16,8 @@ public class PlayerJoinListener implements Listener
 	public void onPlayerJoin(PlayerJoinEvent event) 
 	{
 		//Bukkit.broadcastMessage("Moin du Hobelschlonze" + event.getPlayer().getUniqueId().toString() );
-		event.setJoinMessage("Willkommen du Schwuler Hengst!");
+		//event.setJoinMessage("Willkommen du Schwuler Hengst!");
+		event.getPlayer().sendMessage("Willkommen du Schwuler Hengst!");
 		
 		if (PlayerManager.getPlayer(event.getPlayer().getUniqueId().toString()) == null) 
 		{
