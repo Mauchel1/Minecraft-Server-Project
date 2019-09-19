@@ -16,7 +16,7 @@ protected static final main plugin = main.p;
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
-            sender.sendMessage("Du hast " + PlayerManager.getSkillXP(((Player) sender).getUniqueId().toString(), "Woodcutting") + " XP in Level " + PlayerManager.getSkillLvl(((Player) sender).getUniqueId().toString(), "Woodcutting"));
+            sender.sendMessage("Du hast " + (int) PlayerManager.getSkillXP(((Player) sender).getUniqueId().toString(), "Woodcutting") + " XP in Level " + PlayerManager.getSkillLvl(((Player) sender).getUniqueId().toString(), "Woodcutting"));
 
         }
 

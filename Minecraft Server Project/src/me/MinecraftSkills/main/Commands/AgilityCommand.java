@@ -17,7 +17,7 @@ protected static final main plugin = main.p;
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
-            sender.sendMessage("Du hast " + PlayerManager.getSkillXP(((Player) sender).getUniqueId().toString(), "Agility") + " XP in Level " + PlayerManager.getSkillLvl(((Player) sender).getUniqueId().toString(), "Agility"));
+            sender.sendMessage("Du hast " + (int) PlayerManager.getSkillXP(((Player) sender).getUniqueId().toString(), "Agility") + " XP in Level " + PlayerManager.getSkillLvl(((Player) sender).getUniqueId().toString(), "Agility"));
         }
 
         // If the player (or console) uses our command correct, we can return true

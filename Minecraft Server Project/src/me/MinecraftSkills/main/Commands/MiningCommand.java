@@ -22,7 +22,7 @@ public class MiningCommand implements CommandExecutor{
 
             // Give the player our items (comma-seperated list of all ItemStack)
             player.getInventory().addItem(bricks);
-            sender.sendMessage("Du hast " + PlayerManager.getSkillXP(((Player) sender).getUniqueId().toString(), "Mining") + " XP in Level " + PlayerManager.getSkillLvl(((Player) sender).getUniqueId().toString(), "Mining"));
+            sender.sendMessage("Du hast " + (int) PlayerManager.getSkillXP(((Player) sender).getUniqueId().toString(), "Mining") + " XP in Level " + PlayerManager.getSkillLvl(((Player) sender).getUniqueId().toString(), "Mining"));
 
         }
 
