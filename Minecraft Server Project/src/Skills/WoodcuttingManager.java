@@ -22,7 +22,7 @@ public class WoodcuttingManager {
 
 		Woodplayer wp = getWoodplayerByUUID(UUID);
 		
-		if (wp.isSuperAxeReady())
+		if (wp.isSuperAxeReady() && wp.canUseSuperAxe())
 		{
 			wp.superAxeInUse = true;
 			wp.setLastTimeUsed();
@@ -150,6 +150,11 @@ class Woodplayer
 		this.UUID = UUID;
 	}
 	
+	public boolean canUseSuperAxe() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 	public void StartAxeInUseTimer() {
 		timer.schedule(new TaskSwitchSuperAxeOff(this, UUID), 7000); //TODO Zeit parametrisieren
 		

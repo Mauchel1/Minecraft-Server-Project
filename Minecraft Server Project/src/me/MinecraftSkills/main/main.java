@@ -21,6 +21,7 @@ public class main extends JavaPlugin implements Listener{
     	p = this;
     	PlayerManager.loadConfig();
     	XpManager.loadConfig();
+    	SkillManager.loadConfig();
     	registerCommands();
     	registerEvents();
     	
@@ -35,6 +36,7 @@ public class main extends JavaPlugin implements Listener{
     public void onDisable() {
     	PlayerManager.saveConfig();
     	XpManager.saveConfig();
+    	SkillManager.saveConfig();
     	//System.out.println("Plugin MinecraftSkills gestoppt");
     	ConsoleMsg(ChatColor.RED, "Plugin MinecraftSkills gestoppt");
     	
