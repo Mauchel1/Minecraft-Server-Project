@@ -7,7 +7,6 @@ import java.util.TimerTask;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.block.Block;
 
 import me.MinecraftSkills.main.PlayerManager;
@@ -70,7 +69,7 @@ public class WoodcuttingManager {
 		{
 
 			// Catch maximum Treesize
-			if (overflow > 500) //TODO parametrisieren
+			if (overflow > 50) //TODO parametrisieren
 			{
 				break;
 			}
@@ -160,7 +159,12 @@ class Woodplayer
 	
 	public boolean isSuperAxeReady()
 	{
-		return (System.currentTimeMillis() > lastTimeUsed + 60000); //TODO Zeit parametrisieren
+		if (System.currentTimeMillis() <= lastTimeUsed + 180000 ) 
+		{
+			//main.ConsoleMsg(ChatColor.DARK_GREEN , "WoodcuttingManager: " + "lastTimeUsed " + lastTimeUsed + " CurrentTime " + System.currentTimeMillis());
+			Bukkit.getPlayer(java.util.UUID.fromString(UUID)).sendMessage(ChatColor.DARK_GREEN + "SuperAxt bereit in " + (int) (180000 - (System.currentTimeMillis() - lastTimeUsed))/1000 + " Sekunden");
+		}
+		return (System.currentTimeMillis() > lastTimeUsed + 180000); //TODO Zeit parametrisieren
 	}
 	
 	public void stopSuperAxe()
