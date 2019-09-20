@@ -1,11 +1,12 @@
 Ability:
   Woodcutting:
     SuperAxe:
-      activationLevel: 20
-      # maxBlockBreakNumber: 20
+      activationLevel: 20.0
+      # maxBlockBreakNumber: 20.0
       maxBlockNumberLvlMultiplyer: 0.5
-      # maxBlockBreakNumber: 500
-      timeStaysReady: 7
-      timeToNextUse: 180
-      minTimeToNextUse: 
+      # maxBlockBreakNumber: 500.0
+      timeStaysReady: 7.0
+      maxTimeToNextUse: 180.0
+      minTimeToNextUse: 10.0
+      timeReducedPerLevel: 0.5
       

@@ -10,6 +10,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.block.Block;
 
 import me.MinecraftSkills.main.PlayerManager;
+import me.MinecraftSkills.main.SkillManager;
 import me.MinecraftSkills.main.XpManager;
 import me.MinecraftSkills.main.main;
 
@@ -64,12 +65,13 @@ public class WoodcuttingManager {
 		main.ConsoleMsg(ChatColor.DARK_GREEN , "WoodcuttingManager: " + "Cutting down tree");
 
 		int overflow = 0;
+		int maxBlocks = (int) (PlayerManager.getSkillLvl(UUID, "Woodcutting") * SkillManager.getSkillConfigEntry("Ability", "Woodcutting", "SuperAxe", "maxBlockNumberLvlMultiplyer") );
 		
 		while (ToCheckBlocks.size() > 0) 
 		{
 
 			// Catch maximum Treesize
-			if (overflow > 50) //TODO parametrisieren
+			if (overflow > maxBlocks )
 			{
 				break;
 			}
@@ -151,12 +153,18 @@ class Woodplayer
 	}
 	
 	public boolean canUseSuperAxe() {
-		// TODO Auto-generated method stub
-		return false;
+		if (PlayerManager.getSkillLvl(UUID, "Woodcutting") >= SkillManager.getSkillConfigEntry("Ability", "Woodcutting", "SuperAxe", "activationLevel")) 
+		{
+			return true;
+		} else 
+		{
+			Bukkit.getPlayer(java.util.UUID.fromString(UUID)).sendMessage(ChatColor.DARK_GREEN + "SuperAxt kann erst ab Level " + (int) SkillManager.getSkillConfigEntry("Ability", "Woodcutting", "SuperAxe", "activationLevel") + " verwendet werden.");
+			return false;
+		}
 	}
 
 	public void StartAxeInUseTimer() {
-		timer.schedule(new TaskSwitchSuperAxeOff(this, UUID), 7000); //TODO Zeit parametrisieren
+		timer.schedule(new TaskSwitchSuperAxeOff(this, UUID), (int) SkillManager.getSkillConfigEntry("Ability", "Woodcutting", "SuperAxe", "timeStaysReady") * 1000);
 		
 	}
 
@@ -164,12 +172,18 @@ class Woodplayer
 	
 	public boolean isSuperAxeReady()
 	{
-		if (System.currentTimeMillis() <= lastTimeUsed + 180000 ) 
+		int cooldownTime = (int) (SkillManager.getSkillConfigEntry("Ability", "Woodcutting", "SuperAxe", "maxTimeToNextUse")) - (int) (PlayerManager.getSkillLvl(UUID, "Woodcutting") * SkillManager.getSkillConfigEntry("Ability", "Woodcutting", "SuperAxe", "timeReducedPerLevel"));
+		cooldownTime = (cooldownTime < (int) SkillManager.getSkillConfigEntry("Ability", "Woodcutting", "SuperAxe", "minTimeToNextUse")) ? (int) SkillManager.getSkillConfigEntry("Ability", "Woodcutting", "SuperAxe", "minTimeToNextUse"): cooldownTime;
+		if (System.currentTimeMillis() <= lastTimeUsed + (cooldownTime * 1000) ) 
 		{
 			//main.ConsoleMsg(ChatColor.DARK_GREEN , "WoodcuttingManager: " + "lastTimeUsed " + lastTimeUsed + " CurrentTime " + System.currentTimeMillis());
-			Bukkit.getPlayer(java.util.UUID.fromString(UUID)).sendMessage(ChatColor.DARK_GREEN + "SuperAxt bereit in " + (int) (180000 - (System.currentTimeMillis() - lastTimeUsed))/1000 + " Sekunden");
+			Bukkit.getPlayer(java.util.UUID.fromString(UUID)).sendMessage(ChatColor.DARK_GREEN + "SuperAxt bereit in " + (int) ((cooldownTime * 1000) - (System.currentTimeMillis() - lastTimeUsed))/1000 + " Sekunden");
+			return false;
 		}
-		return (System.currentTimeMillis() > lastTimeUsed + 180000); //TODO Zeit parametrisieren
+		else 
+		{
+			return true;
+		}
 	}
 	
 	public void stopSuperAxe()

@@ -49,9 +49,7 @@ public class SkillManager {
 		}
     }
     
-	public static int getSkillConfigEntry(String Skill, String Block) { 
-		//main.ConsoleMsg(ChatColor.BLUE , "Try to get Xp for: " + Skill + "." + main.convertName(Block));
-		
-		return skillConfig.getInt(Skill + "." + main.convertName(Block)); 
+	public static double getSkillConfigEntry(String ConfigClass, String SkillClass, String Skill, String configEntry) { 
+		return skillConfig.getDouble(ConfigClass + "." + SkillClass + "." + Skill + "." + configEntry); 
 	}
 }
