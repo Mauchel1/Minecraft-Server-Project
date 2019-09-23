@@ -12,4 +12,7 @@ Ability:
   Mining:
     DoubleDrop:
       chanceIncreasePerLevelInPercent: 0.1
+  Farming:
+    DoubleDrop:
+      chanceIncreasePerLevelInPercent: 0.1
       

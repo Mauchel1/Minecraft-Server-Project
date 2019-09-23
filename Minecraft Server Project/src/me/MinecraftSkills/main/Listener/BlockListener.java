@@ -1,5 +1,6 @@
 package me.MinecraftSkills.main.Listener;
 
+import java.util.Collection;
 import java.util.Random;
 
 import org.bukkit.ChatColor;
@@ -68,6 +69,19 @@ public class BlockListener implements Listener
                 else if (ageData.getAge() == ageData.getMaximumAge()) 
                 {
         			PlayerManager.addSkillXP(event.getPlayer().getUniqueId().toString(), "Farming", XpManager.getSkillXP("Farming", event.getBlock().getType().name()) );
+        			
+        			//DoubleDrop
+        			
+        			if (!event.getBlock().getDrops(event.getPlayer().getInventory().getItemInMainHand()).isEmpty())
+        			{
+        				if ( PlayerManager.getSkillLvl(event.getPlayer().getUniqueId().toString(), "Farming") * SkillManager.getSkillConfigEntry("Ability", "Farming", "DoubleDrop", "chanceIncreasePerLevelInPercent") * 10 >= new Random().nextInt(1001) )
+        				{
+	        				Collection<ItemStack> dropCollection = event.getBlock().getDrops(event.getPlayer().getInventory().getItemInMainHand());
+	        				for (ItemStack item : dropCollection) {
+	        					event.getBlock().getWorld().dropItemNaturally(event.getBlock().getLocation(), item);	        					
+	        				}
+        				}
+        			}
                 }
             }
             else
