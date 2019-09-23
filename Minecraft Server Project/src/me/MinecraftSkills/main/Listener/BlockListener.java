@@ -1,14 +1,18 @@
 package me.MinecraftSkills.main.Listener;
 
+import java.util.Random;
+
 import org.bukkit.ChatColor;
 import org.bukkit.block.data.Ageable;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
 import org.bukkit.event.block.*;
+import org.bukkit.inventory.ItemStack;
 
 import Skills.WoodcuttingManager;
 import me.MinecraftSkills.main.PlayerManager;
+import me.MinecraftSkills.main.SkillManager;
 import me.MinecraftSkills.main.XpManager;
 import me.MinecraftSkills.main.main;
 
@@ -24,10 +28,22 @@ public class BlockListener implements Listener
 		
 		//Mining
 		
+		//TODO Block "natürlich" gebrochen? korrektes tool benutzt? gibt er überhaupt drops? (stein mit hand abbauen...) -event.getBlock().getDrops(ItemStack) should do, but dosnt work correctly ...
+		// https://www.spigotmc.org/threads/block-getdrops-itemstack-incorrect-results.239989/
 		if (XpManager.getSkillXP("Mining", event.getBlock().getType().name()) != 0) 
 		{
-			PlayerManager.addSkillXP(event.getPlayer().getUniqueId().toString(), "Mining", XpManager.getSkillXP("Mining", event.getBlock().getType().name()) );
 			//main.ConsoleMsg(ChatColor.AQUA , "Block Event: Block found, XP: " + XpManager.getSkillXP("Mining", event.getBlock().getType().name()  ));
+			//main.ConsoleMsg(ChatColor.AQUA , "Block Event: " + event.getBlock().getType() + " isDropItems: " + event.isDropItems() + " getDropItems: " + event.getBlock().getDrops(event.getPlayer().getInventory().getItemInMainHand()).stream().findFirst() + " MainHand: " + event.getPlayer().getInventory().getItemInMainHand());
+			PlayerManager.addSkillXP(event.getPlayer().getUniqueId().toString(), "Mining", XpManager.getSkillXP("Mining", event.getBlock().getType().name()) );
+			
+			//DoubleDrop
+			if (!event.getBlock().getDrops(event.getPlayer().getInventory().getItemInMainHand()).isEmpty())
+			{
+				if ( PlayerManager.getSkillLvl(event.getPlayer().getUniqueId().toString(), "Mining") * SkillManager.getSkillConfigEntry("Ability", "Mining", "DoubleDrop", "chanceIncreasePerLevelInPercent") * 10 >= new Random().nextInt(1001) )
+				{
+					event.getBlock().getWorld().dropItemNaturally(event.getBlock().getLocation(), (ItemStack) event.getBlock().getDrops(event.getPlayer().getInventory().getItemInMainHand()).stream().findFirst().get());
+				}
+			}
 		}
 
 		//Farming

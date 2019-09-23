@@ -9,4 +9,7 @@ Ability:
       maxTimeToNextUse: 180.0
       minTimeToNextUse: 10.0
       timeReducedPerLevel: 0.5
+  Mining:
+    DoubleDrop:
+      chanceIncreasePerLevelInPercent: 0.1
       
