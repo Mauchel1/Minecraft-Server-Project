@@ -15,4 +15,6 @@ Ability:
   Farming:
     DoubleDrop:
       chanceIncreasePerLevelInPercent: 0.1
+    GreenThumb:
+      chanceIncreasePerLevelInPercent: 0.1
       

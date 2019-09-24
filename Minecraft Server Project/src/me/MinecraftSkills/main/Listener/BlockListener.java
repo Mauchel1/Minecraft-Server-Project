@@ -11,6 +11,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.*;
 import org.bukkit.inventory.ItemStack;
 
+import Skills.FarmingManager;
 import Skills.WoodcuttingManager;
 import me.MinecraftSkills.main.PlayerManager;
 import me.MinecraftSkills.main.SkillManager;
@@ -82,6 +83,13 @@ public class BlockListener implements Listener
 	        				}
         				}
         			}
+        			
+        			//GreenThumb
+       
+    				if ( PlayerManager.getSkillLvl(event.getPlayer().getUniqueId().toString(), "Farming") * SkillManager.getSkillConfigEntry("Ability", "Farming", "GreenThumb", "chanceIncreasePerLevelInPercent") * 10 >= new Random().nextInt(1001) )
+    				{
+    					FarmingManager.GreenThumb(event.getBlock(), event.getBlock().getType());
+    				}        			
                 }
             }
             else
