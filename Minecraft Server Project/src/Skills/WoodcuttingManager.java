@@ -7,7 +7,9 @@ import java.util.TimerTask;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Particle;
 import org.bukkit.block.Block;
+import org.bukkit.inventory.ItemStack;
 
 import me.MinecraftSkills.main.PlayerManager;
 import me.MinecraftSkills.main.SkillManager;
@@ -130,6 +132,8 @@ public class WoodcuttingManager {
 
 		for (Block block : FoundBlocks) 
 		{
+			//Partikel, Ort, Anzahl, offset (x, y, z), Speed, datazeug
+			block.getWorld().spawnParticle(Particle.ITEM_CRACK, block.getLocation(), 100, 1, 1, 1, 0.15, new ItemStack(block.getType()));
 			block.breakNaturally();
 
 			//block.setType(Material.AIR);
