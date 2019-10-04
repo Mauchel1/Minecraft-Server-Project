@@ -1,6 +1,5 @@
 package me.MinecraftSkills.main.Listener;
 
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Item;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -8,7 +7,6 @@ import org.bukkit.event.player.PlayerFishEvent;
 
 import me.MinecraftSkills.main.PlayerManager;
 import me.MinecraftSkills.main.XpManager;
-import me.MinecraftSkills.main.main;
 
 public class FishingListener  implements Listener
 
