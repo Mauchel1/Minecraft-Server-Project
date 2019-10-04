@@ -26,16 +26,19 @@ public class FishingListener  implements Listener
 		//Was an der Angel dran!
 		if (event.getCaught() != null)
 		{
-			Item item = (Item) event.getCaught();
-			main.ConsoleMsg(ChatColor.AQUA , "Fishing Event: " + item.getItemStack().getType().toString());
 		
-		
-		if (XpManager.getSkillXP("Fishing", item.getItemStack().getType().name()) != 0) 
-		{
-			PlayerManager.addSkillXP(event.getPlayer().getUniqueId().toString(), "Fishing", XpManager.getSkillXP("Fishing", item.getItemStack().getType().name()) );
-			main.ConsoleMsg(ChatColor.AQUA , "Fishing Event: Cought, XP: " + XpManager.getSkillXP("Fishing", item.getItemStack().getType().name()  ));
-		}
-
+			//Ein Item geangelt
+			if (event.getCaught() instanceof Item)
+			{
+				Item item = (Item) event.getCaught();
+				//main.ConsoleMsg(ChatColor.AQUA , "Fishing Event: " + item.getItemStack().getType().toString());
+				
+				if (XpManager.getSkillXP("Fishing", item.getItemStack().getType().name()) != 0) 
+				{
+					PlayerManager.addSkillXP(event.getPlayer().getUniqueId().toString(), "Fishing", XpManager.getSkillXP("Fishing", item.getItemStack().getType().name()) );
+					//main.ConsoleMsg(ChatColor.AQUA , "Fishing Event: Cought, XP: " + XpManager.getSkillXP("Fishing", item.getItemStack().getType().name()  ));
+				}
+			}
 		}
 	}
 

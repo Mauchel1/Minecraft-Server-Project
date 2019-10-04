@@ -19,16 +19,16 @@ protected static final main plugin = main.p;
         	
         	if (args.length == 0) 
         	{
-                sender.sendMessage("Scoreboard aufrufen args 1");
+                //sender.sendMessage("Scoreboard aufrufen args 1");
                 ScoreboardManager.displayScoreboardLvl((Player) sender);
-                sender.sendMessage("Scoreboard aufrufen fertig");
+                //sender.sendMessage("Scoreboard aufrufen fertig");
         	}
         	else if (args.length == 1 && args[0].toLowerCase().equals("xp"))
         	{
         		
-	            sender.sendMessage("Scoreboard aufrufen args 2");
+	            //sender.sendMessage("Scoreboard aufrufen args 2");
 	            ScoreboardManager.displayScoreboardXp((Player) sender);
-	            sender.sendMessage("Scoreboard aufrufen fertig");
+	            //sender.sendMessage("Scoreboard aufrufen fertig");
         		
         	}
 
