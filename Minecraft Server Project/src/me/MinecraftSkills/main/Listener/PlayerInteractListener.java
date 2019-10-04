@@ -19,7 +19,7 @@ public class PlayerInteractListener implements Listener
 		
 		if (event.getAction().equals(Action.RIGHT_CLICK_AIR))
 		{
-			if (event.getPlayer().getInventory().getItemInMainHand().getType().toString().toLowerCase().contains("axe")) 
+			if (event.getPlayer().getInventory().getItemInMainHand().getType().toString().toLowerCase().contains("_axe")) 
 			{
 				WoodcuttingManager.useSuperAxe(event.getPlayer().getUniqueId().toString());
 			}
