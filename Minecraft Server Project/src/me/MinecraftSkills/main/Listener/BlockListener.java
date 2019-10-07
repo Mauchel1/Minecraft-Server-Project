@@ -35,23 +35,21 @@ public class BlockListener implements Listener
 		// https://www.spigotmc.org/threads/block-getdrops-itemstack-incorrect-results.239989/
 		if (event.getPlayer().getInventory().getItemInMainHand().getType().toString().toLowerCase().contains("_pickaxe"))
 		{
-			if (event.getPlayer().getInventory().getItemInMainHand().getEnchantments().containsKey(Enchantment.SILK_TOUCH))
-			{
-				main.ConsoleMsg(ChatColor.AQUA , "netter versuch...");
-			}
-			
-			if (XpManager.getSkillXP("Mining", event.getBlock().getType().name()) != 0) 
-			{
-				//main.ConsoleMsg(ChatColor.AQUA , "Block Event: Block found, XP: " + XpManager.getSkillXP("Mining", event.getBlock().getType().name()  ));
-				//main.ConsoleMsg(ChatColor.AQUA , "Block Event: " + event.getBlock().getType() + " isDropItems: " + event.isDropItems() + " getDropItems: " + event.getBlock().getDrops(event.getPlayer().getInventory().getItemInMainHand()).stream().findFirst() + " MainHand: " + event.getPlayer().getInventory().getItemInMainHand());
-				PlayerManager.addSkillXP(event.getPlayer().getUniqueId().toString(), "Mining", XpManager.getSkillXP("Mining", event.getBlock().getType().name()) );
-				
-				//DoubleDrop
-				if (!event.getBlock().getDrops(event.getPlayer().getInventory().getItemInMainHand()).isEmpty())
+			if (!event.getPlayer().getInventory().getItemInMainHand().getEnchantments().containsKey(Enchantment.SILK_TOUCH))
+			{			
+				if (XpManager.getSkillXP("Mining", event.getBlock().getType().name()) != 0) 
 				{
-					if ( PlayerManager.getSkillLvl(event.getPlayer().getUniqueId().toString(), "Mining") * SkillManager.getSkillConfigEntry("Ability", "Mining", "DoubleDrop", "chanceIncreasePerLevelInPercent") * 10 >= new Random().nextInt(1001) )
+					//main.ConsoleMsg(ChatColor.AQUA , "Block Event: Block found, XP: " + XpManager.getSkillXP("Mining", event.getBlock().getType().name()  ));
+					//main.ConsoleMsg(ChatColor.AQUA , "Block Event: " + event.getBlock().getType() + " isDropItems: " + event.isDropItems() + " getDropItems: " + event.getBlock().getDrops(event.getPlayer().getInventory().getItemInMainHand()).stream().findFirst() + " MainHand: " + event.getPlayer().getInventory().getItemInMainHand());
+					PlayerManager.addSkillXP(event.getPlayer().getUniqueId().toString(), "Mining", XpManager.getSkillXP("Mining", event.getBlock().getType().name()) );
+					
+					//DoubleDrop
+					if (!event.getBlock().getDrops(event.getPlayer().getInventory().getItemInMainHand()).isEmpty())
 					{
-						event.getBlock().getWorld().dropItemNaturally(event.getBlock().getLocation(), (ItemStack) event.getBlock().getDrops(event.getPlayer().getInventory().getItemInMainHand()).stream().findFirst().get());
+						if ( PlayerManager.getSkillLvl(event.getPlayer().getUniqueId().toString(), "Mining") * SkillManager.getSkillConfigEntry("Ability", "Mining", "DoubleDrop", "chanceIncreasePerLevelInPercent") * 10 >= new Random().nextInt(1001) )
+						{
+							event.getBlock().getWorld().dropItemNaturally(event.getBlock().getLocation(), (ItemStack) event.getBlock().getDrops(event.getPlayer().getInventory().getItemInMainHand()).stream().findFirst().get());
+						}
 					}
 				}
 			}
