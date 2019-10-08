@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.World;
 import org.bukkit.block.Block;
@@ -33,7 +34,7 @@ public class VillageCommands implements CommandExecutor{
         	
         	if (args.length == 0) //leerer Aufruf
         	{
-            	sender.sendMessage("Parameter: showvillager, showbeds, showmeeting, owner");
+            	sender.sendMessage("Parameter: showvillager, showbeds, showmeeting, owner, meetingvillager");
             	//https://www.spigotmc.org/threads/comprehensive-particle-spawning-guide-1-13.343001/
 
         	}
@@ -46,14 +47,7 @@ public class VillageCommands implements CommandExecutor{
         		} 
         		else
         		{
-    				if (particleVillagerTask == null || particleVillagerTask.isCancelled()) {
-        				VillagePlugin.ConsoleMsg(ChatColor.YELLOW, villagerList.size() + " Villager gefunden");
-        				particleVillagerTask = new TaskSpawnVillagerParticlePeriodically(villagerList, player.getWorld()).runTaskTimer(VillagePlugin.p, 15, 15);
-    				}
-    				else
-    				{
-    					particleVillagerTask.cancel();
-    				}
+					StartVillagerTask(player.getWorld(), villagerList);
         		}
         	}
         	else if (args.length == 1 && args[0].toLowerCase().equals("showbeds"))
@@ -135,6 +129,39 @@ public class VillageCommands implements CommandExecutor{
     				VillagePlugin.ConsoleMsg(ChatColor.YELLOW, "Du musst ein Bett angucken!");
         		}
         	}
+        	else if (args.length == 1 && args[0].toLowerCase().equals("meetingvillager"))
+        	{
+        		if (player.getTargetBlock(null, 15).getType().equals(Material.BELL)) 
+        		{
+	        		List<Villager> villagerList = getNearbyVillagers(player.getWorld(), player.getLocation());
+            		if (villagerList.isEmpty())
+            		{
+        				VillagePlugin.ConsoleMsg(ChatColor.YELLOW, "Keine Villager gefunden");
+            		} 
+            		else
+            		{
+						List<Villager> vList = new ArrayList<Villager>();
+            			for (Villager villager : villagerList) {
+            				if (villager.getMemory(MemoryKey.MEETING_POINT) != null && villager.getMemory(MemoryKey.MEETING_POINT).equals(player.getTargetBlock(null, 15).getLocation())) 
+							{
+								vList.add(villager);
+							}
+						}
+            			if (!vList.isEmpty()) 
+            			{
+	            			StartVillagerTask(player.getWorld(), vList);
+            			}
+            			else
+            			{
+            				VillagePlugin.ConsoleMsg(ChatColor.YELLOW, "Keine Villager haben diesen MeetingPoint gefunden");
+            			}
+            		}
+        		}
+        		else 
+        		{
+    				VillagePlugin.ConsoleMsg(ChatColor.YELLOW, "Du musst eine Glocke angucken!");
+    			}
+			}
         }		
 		return true;
 	}
