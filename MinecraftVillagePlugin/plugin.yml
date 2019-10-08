@@ -1,0 +1,9 @@
+name: VillagePlugin
+main: me.MinecraftVillage.VillagePlugin
+version: 1.0
+author: Mauchel1
+api-version: 1.14
+commands:
+  vl:
+    description: Zeigt die Sachen
+    usage: /vl
