@@ -9,7 +9,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import me.MinecraftSkills.main.Commands.*;
 import me.MinecraftSkills.main.Listener.*;
 
-public class main extends JavaPlugin implements Listener{
+public class main extends JavaPlugin {
 
     
 	public static main p;
