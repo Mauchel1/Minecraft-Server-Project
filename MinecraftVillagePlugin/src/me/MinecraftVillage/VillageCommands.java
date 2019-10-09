@@ -34,7 +34,7 @@ public class VillageCommands implements CommandExecutor{
         	
         	if (args.length == 0) //leerer Aufruf
         	{
-            	sender.sendMessage("Parameter: showvillager, showbeds, showmeeting, owner, meetingvillager");
+            	sender.sendMessage("Parameter: showvillager, showbeds, showmeeting, showowner, showmeetingvillager, showbrain, hidevillager, hidebeds, hidemeeting, hideowner, hidemeetingvillager, hidebrain");
             	//https://www.spigotmc.org/threads/comprehensive-particle-spawning-guide-1-13.343001/
 
         	}
@@ -50,6 +50,10 @@ public class VillageCommands implements CommandExecutor{
 					StartVillagerTask(player.getWorld(), villagerList);
         		}
         	}
+        	else if (args.length == 1 && args[0].toLowerCase().equals("hidevillager"))
+        	{
+        		StopVillagerTask();
+        	}
         	else if (args.length == 1 && args[0].toLowerCase().equals("showbeds"))
         	{
         		List<Villager> villagerList = getNearbyVillagers(player.getWorld(), player.getLocation());
@@ -59,15 +63,12 @@ public class VillageCommands implements CommandExecutor{
         		} 
         		else
         		{
-    				if (particleBedTask == null || particleBedTask.isCancelled()) {
-        				VillagePlugin.ConsoleMsg(ChatColor.YELLOW, villagerList.size() + " Villager gefunden");
-        				particleBedTask = new TaskSpawnBedParticlePeriodically(villagerList, player.getWorld()).runTaskTimer(VillagePlugin.p, 15, 15);
-    				}
-    				else
-    				{
-    					particleBedTask.cancel();
-    				}
+        			StartBedTask(player.getWorld(), villagerList);
         		}
+        	}
+        	else if (args.length == 1 && args[0].toLowerCase().equals("hidebeds"))
+        	{
+        		StopBedTask();
         	}
         	else if (args.length == 1 && args[0].toLowerCase().equals("showmeeting"))
         	{
@@ -78,17 +79,14 @@ public class VillageCommands implements CommandExecutor{
         		} 
         		else
         		{
-    				if (particleMeetingTask == null || particleMeetingTask.isCancelled()) {
-        				VillagePlugin.ConsoleMsg(ChatColor.YELLOW, villagerList.size() + " Villager gefunden");
-        				particleMeetingTask = new TaskSpawnMeetingPointParticlePeriodically(villagerList, player.getWorld()).runTaskTimer(VillagePlugin.p, 6, 6);
-    				}
-    				else
-    				{
-    					particleMeetingTask.cancel();
-    				}
+        			StartMeetingPointTask(player.getWorld(), villagerList);
         		}
         	}
-        	else if (args.length == 1 && args[0].toLowerCase().equals("owner"))
+        	else if (args.length == 1 && args[0].toLowerCase().equals("hidemeeting"))
+        	{
+        		StopMeetingPointTask();
+        	}
+        	else if (args.length == 1 && args[0].toLowerCase().equals("showowner"))
         	{
         		if (player.getTargetBlock(null, 15).getType().toString().toLowerCase().contains("_bed")) 
         		{
@@ -129,7 +127,11 @@ public class VillageCommands implements CommandExecutor{
     				VillagePlugin.ConsoleMsg(ChatColor.YELLOW, "Du musst ein Bett angucken!");
         		}
         	}
-        	else if (args.length == 1 && args[0].toLowerCase().equals("meetingvillager"))
+        	else if (args.length == 1 && args[0].toLowerCase().equals("hideowner"))
+        	{
+        		StopVillagerTask();
+        	}
+        	else if (args.length == 1 && args[0].toLowerCase().equals("showmeetingvillager"))
         	{
         		if (player.getTargetBlock(null, 15).getType().equals(Material.BELL)) 
         		{
@@ -162,6 +164,46 @@ public class VillageCommands implements CommandExecutor{
     				VillagePlugin.ConsoleMsg(ChatColor.YELLOW, "Du musst eine Glocke angucken!");
     			}
 			}
+        	else if (args.length == 1 && args[0].toLowerCase().equals("hidemeetingvillager"))
+        	{
+        		StopVillagerTask();
+        	}
+        	else if (args.length == 1 && args[0].toLowerCase().equals("showbrain"))
+        	{
+        		Villager villager = getNearestVillager(player.getWorld(), player.getLocation());
+        		if(villager != null)
+        		{
+					List<Villager> villagerList = new ArrayList<Villager>();
+					villagerList.add(villager);
+					StartVillagerTask(player.getWorld(), villagerList);
+    				if (villager.getMemory(MemoryKey.MEETING_POINT) != null) 
+					{
+    					StartMeetingPointTask(player.getWorld(), villagerList);
+	    			}
+	    			else
+	    			{
+	    				VillagePlugin.ConsoleMsg(ChatColor.YELLOW, "Der Villager hat keinen MeetingPoint gefunden");
+	    			}
+    				if (villager.getMemory(MemoryKey.HOME) != null) 
+					{
+    					StartBedTask(player.getWorld(), villagerList);
+	    			}
+	    			else
+	    			{
+	    				VillagePlugin.ConsoleMsg(ChatColor.YELLOW, "Der Villager hat kein Zuhause");
+	    			}
+        		}
+        		else
+        		{
+    				VillagePlugin.ConsoleMsg(ChatColor.YELLOW, "Kein Villager in unmittelbarer Nähe");
+        		}
+        	}
+        	else if (args.length == 1 && args[0].toLowerCase().equals("hidebrain"))
+        	{
+        		StopVillagerTask();
+        		StopBedTask();
+        		StopMeetingPointTask();
+        	}
         }		
 		return true;
 	}
@@ -179,6 +221,79 @@ public class VillageCommands implements CommandExecutor{
 		return villagerList;
 	}
 	
+	Villager getNearestVillager(World w, Location loc)
+	{
+		Villager nearestVillager = null;
+		double distance = 99999;
+		Collection<Entity> entitys = (w.getNearbyEntities(loc, 10, 5, 10));
+		for (Entity entity : entitys) {
+			if (entity instanceof Villager)
+			{
+				if (entity.getLocation().distance(loc) < distance)
+				{
+					distance = entity.getLocation().distance(loc);
+					nearestVillager = (Villager) entity;
+				}
+			}
+		}
+		return nearestVillager;
+	}
+	
+	private void StopMeetingPointTask()
+	{
+		if (particleMeetingTask != null && !particleMeetingTask.isCancelled())
+		{
+			VillagePlugin.ConsoleMsg(ChatColor.YELLOW, "MeetingPoint Marker gestoppt");
+			particleMeetingTask.cancel();
+		}
+	}
+	
+	private void StartMeetingPointTask(World w, List<Villager> villagerList)
+	{
+		if (particleMeetingTask == null || particleMeetingTask.isCancelled()) {
+			VillagePlugin.ConsoleMsg(ChatColor.YELLOW, villagerList.size() + " Villager gefunden");
+			particleMeetingTask = new TaskSpawnMeetingPointParticlePeriodically(villagerList, w).runTaskTimer(VillagePlugin.p, 6, 6);
+		}
+		else
+		{
+			VillagePlugin.ConsoleMsg(ChatColor.YELLOW, "MeetingPoint Marker restarted");
+			particleMeetingTask.cancel();
+			particleMeetingTask = new TaskSpawnMeetingPointParticlePeriodically(villagerList, w).runTaskTimer(VillagePlugin.p, 6, 6);
+		}
+	}
+
+	private void StopBedTask()
+	{
+		if (particleBedTask != null && !particleBedTask.isCancelled())
+		{
+			VillagePlugin.ConsoleMsg(ChatColor.YELLOW, " Bedmarker gestoppt");
+			particleBedTask.cancel();
+		}
+	}
+	
+	private void StartBedTask(World w, List<Villager> villagerList)
+	{
+		if (particleBedTask == null || particleBedTask.isCancelled()) {
+			VillagePlugin.ConsoleMsg(ChatColor.YELLOW, villagerList.size() + " Villager gefunden");
+			particleBedTask = new TaskSpawnBedParticlePeriodically(villagerList, w).runTaskTimer(VillagePlugin.p, 15, 15);
+		}
+		else
+		{
+			VillagePlugin.ConsoleMsg(ChatColor.YELLOW, " Bedmarker restarted");
+			particleBedTask.cancel();
+			particleBedTask = new TaskSpawnBedParticlePeriodically(villagerList, w).runTaskTimer(VillagePlugin.p, 15, 15);
+		}
+	}
+	
+	private void StopVillagerTask()
+	{
+		if (particleVillagerTask != null && !particleVillagerTask.isCancelled())
+		{
+			VillagePlugin.ConsoleMsg(ChatColor.YELLOW, " Villagermarker gestoppt");
+			particleVillagerTask.cancel();
+		}
+	}
+	
 	private void StartVillagerTask(World w, List<Villager> villagerList)
 	{
 		if (particleVillagerTask == null || particleVillagerTask.isCancelled()) {
@@ -187,10 +302,10 @@ public class VillageCommands implements CommandExecutor{
 		}
 		else
 		{
-			VillagePlugin.ConsoleMsg(ChatColor.YELLOW, " Villagermarker gestoppt");
+			VillagePlugin.ConsoleMsg(ChatColor.YELLOW, " Villagermarker restarted");
 			particleVillagerTask.cancel();
+			particleVillagerTask = new TaskSpawnVillagerParticlePeriodically(villagerList, w).runTaskTimer(VillagePlugin.p, 15, 15);
 		}
-
 	}
 }
 
