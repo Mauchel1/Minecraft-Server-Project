@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -38,12 +39,46 @@ public class VillageCommands implements CommandExecutor{
             	//https://www.spigotmc.org/threads/comprehensive-particle-spawning-guide-1-13.343001/
 
         	}
+        	else if (args.length == 1 && args[0].toLowerCase().equals("time"))
+        	{
+        		long time = player.getWorld().getTime();
+        		
+        		if (time < 2000)
+        		{
+                	sender.sendMessage("Dorf erkunden, Leute treffen. Zeit: " + time);
+        		}
+        		else if (time < 9000)
+        		{
+                	sender.sendMessage("Auf zur Arbeit! Zeit: " + time);
+        		}
+        		else if (time < 10000)
+        		{
+                	sender.sendMessage("Dorfversammlung! Zeit: " + time);
+        		}
+        		else if (time < 12000)
+        		{
+                	sender.sendMessage("Dorf erkunden, Leute treffen. Zeit: " + time);
+        		}
+        		else if (time < 13000)
+        		{
+                	sender.sendMessage("Alles schläft. Nur der Trottel läuft irgendwo umher. Zeit: " + time);
+        		}
+        		else if (time < 14000)
+        		{
+                	sender.sendMessage("Alles schläft. Nur der Trottel ist zu Hause wach. Zeit: " + time);
+        		}
+        		else
+        		{
+                	sender.sendMessage("Alles schläft. Zeit: " + time);
+        		}            	
+        	}
         	else if (args.length == 1 && args[0].toLowerCase().equals("showvillager"))
         	{
         		List<Villager> villagerList = getNearbyVillagers(player.getWorld(), player.getLocation());
         		if (villagerList.isEmpty())
         		{
     				VillagePlugin.ConsoleMsg(ChatColor.YELLOW, "Keine Villager gefunden");
+    				sender.sendMessage("Keine Villager gefunden");
         		} 
         		else
         		{
@@ -60,6 +95,7 @@ public class VillageCommands implements CommandExecutor{
         		if (villagerList.isEmpty())
         		{
     				VillagePlugin.ConsoleMsg(ChatColor.YELLOW, "Keine Villager gefunden");
+    				sender.sendMessage("Keine Villager gefunden");
         		} 
         		else
         		{
@@ -76,6 +112,7 @@ public class VillageCommands implements CommandExecutor{
         		if (villagerList.isEmpty())
         		{
     				VillagePlugin.ConsoleMsg(ChatColor.YELLOW, "Keine Villager gefunden");
+    				sender.sendMessage("Keine Villager gefunden");
         		} 
         		else
         		{
@@ -106,6 +143,7 @@ public class VillageCommands implements CommandExecutor{
             		if (villagerList.isEmpty())
             		{
         				VillagePlugin.ConsoleMsg(ChatColor.YELLOW, "Keine Villager gefunden");
+        				sender.sendMessage("Keine Villager gefunden");
             		} 
             		else
             		{
@@ -113,6 +151,7 @@ public class VillageCommands implements CommandExecutor{
             				if (villager.getMemory(MemoryKey.HOME) != null && villager.getMemory(MemoryKey.HOME).equals(bedLoc)) 
 							{
 		        				VillagePlugin.ConsoleMsg(ChatColor.YELLOW, "HAB IHN");
+		        				sender.sendMessage("HAB IHN");
 
 								List<Villager> vList = new ArrayList<Villager>();
 								vList.add(villager);
@@ -125,6 +164,7 @@ public class VillageCommands implements CommandExecutor{
         		else 
         		{
     				VillagePlugin.ConsoleMsg(ChatColor.YELLOW, "Du musst ein Bett angucken!");
+    				sender.sendMessage("Du musst ein Bett angucken!");
         		}
         	}
         	else if (args.length == 1 && args[0].toLowerCase().equals("hideowner"))
@@ -139,6 +179,7 @@ public class VillageCommands implements CommandExecutor{
             		if (villagerList.isEmpty())
             		{
         				VillagePlugin.ConsoleMsg(ChatColor.YELLOW, "Keine Villager gefunden");
+        				sender.sendMessage("Keine Villager gefunden");
             		} 
             		else
             		{
@@ -156,12 +197,14 @@ public class VillageCommands implements CommandExecutor{
             			else
             			{
             				VillagePlugin.ConsoleMsg(ChatColor.YELLOW, "Keine Villager haben diesen MeetingPoint gefunden");
+            				sender.sendMessage("Keine Villager haben diesen MeetingPoint gefunden");
             			}
             		}
         		}
         		else 
         		{
     				VillagePlugin.ConsoleMsg(ChatColor.YELLOW, "Du musst eine Glocke angucken!");
+    				sender.sendMessage("Du musst eine Glocke angucken!");
     			}
 			}
         	else if (args.length == 1 && args[0].toLowerCase().equals("hidemeetingvillager"))
@@ -183,6 +226,7 @@ public class VillageCommands implements CommandExecutor{
 	    			else
 	    			{
 	    				VillagePlugin.ConsoleMsg(ChatColor.YELLOW, "Der Villager hat keinen MeetingPoint gefunden");
+	    				sender.sendMessage("Der Villager hat keinen MeetingPoint gefunden");
 	    			}
     				if (villager.getMemory(MemoryKey.HOME) != null) 
 					{
@@ -191,11 +235,13 @@ public class VillageCommands implements CommandExecutor{
 	    			else
 	    			{
 	    				VillagePlugin.ConsoleMsg(ChatColor.YELLOW, "Der Villager hat kein Zuhause");
+	    				sender.sendMessage("Der Villager hat kein Zuhause");
 	    			}
         		}
         		else
         		{
     				VillagePlugin.ConsoleMsg(ChatColor.YELLOW, "Kein Villager in unmittelbarer Nähe");
+    				sender.sendMessage("Kein Villager in unmittelbarer Nähe");
         		}
         	}
         	else if (args.length == 1 && args[0].toLowerCase().equals("hidebrain"))
@@ -244,6 +290,7 @@ public class VillageCommands implements CommandExecutor{
 		if (particleMeetingTask != null && !particleMeetingTask.isCancelled())
 		{
 			VillagePlugin.ConsoleMsg(ChatColor.YELLOW, "MeetingPoint Marker gestoppt");
+			Bukkit.broadcastMessage( "MeetingPoint Marker gestoppt");
 			particleMeetingTask.cancel();
 		}
 	}
@@ -252,11 +299,13 @@ public class VillageCommands implements CommandExecutor{
 	{
 		if (particleMeetingTask == null || particleMeetingTask.isCancelled()) {
 			VillagePlugin.ConsoleMsg(ChatColor.YELLOW, villagerList.size() + " Villager gefunden");
+			Bukkit.broadcastMessage( villagerList.size() + " Villager gefunden");
 			particleMeetingTask = new TaskSpawnMeetingPointParticlePeriodically(villagerList, w).runTaskTimer(VillagePlugin.p, 6, 6);
 		}
 		else
 		{
 			VillagePlugin.ConsoleMsg(ChatColor.YELLOW, "MeetingPoint Marker restarted");
+			Bukkit.broadcastMessage("MeetingPoint Marker restarted");
 			particleMeetingTask.cancel();
 			particleMeetingTask = new TaskSpawnMeetingPointParticlePeriodically(villagerList, w).runTaskTimer(VillagePlugin.p, 6, 6);
 		}
@@ -267,6 +316,7 @@ public class VillageCommands implements CommandExecutor{
 		if (particleBedTask != null && !particleBedTask.isCancelled())
 		{
 			VillagePlugin.ConsoleMsg(ChatColor.YELLOW, " Bedmarker gestoppt");
+			Bukkit.broadcastMessage( " Bedmarker gestoppt");
 			particleBedTask.cancel();
 		}
 	}
@@ -275,11 +325,13 @@ public class VillageCommands implements CommandExecutor{
 	{
 		if (particleBedTask == null || particleBedTask.isCancelled()) {
 			VillagePlugin.ConsoleMsg(ChatColor.YELLOW, villagerList.size() + " Villager gefunden");
+			Bukkit.broadcastMessage( villagerList.size() + " Villager gefunden");
 			particleBedTask = new TaskSpawnBedParticlePeriodically(villagerList, w).runTaskTimer(VillagePlugin.p, 15, 15);
 		}
 		else
 		{
 			VillagePlugin.ConsoleMsg(ChatColor.YELLOW, " Bedmarker restarted");
+			Bukkit.broadcastMessage(" Bedmarker restarted");
 			particleBedTask.cancel();
 			particleBedTask = new TaskSpawnBedParticlePeriodically(villagerList, w).runTaskTimer(VillagePlugin.p, 15, 15);
 		}
@@ -290,6 +342,7 @@ public class VillageCommands implements CommandExecutor{
 		if (particleVillagerTask != null && !particleVillagerTask.isCancelled())
 		{
 			VillagePlugin.ConsoleMsg(ChatColor.YELLOW, " Villagermarker gestoppt");
+			Bukkit.broadcastMessage(" Villagermarker gestoppt");
 			particleVillagerTask.cancel();
 		}
 	}
@@ -298,11 +351,13 @@ public class VillageCommands implements CommandExecutor{
 	{
 		if (particleVillagerTask == null || particleVillagerTask.isCancelled()) {
 			VillagePlugin.ConsoleMsg(ChatColor.YELLOW, villagerList.size() + " Villager gemarkert");
+			Bukkit.broadcastMessage(villagerList.size() + " Villager gemarkert");
 			particleVillagerTask = new TaskSpawnVillagerParticlePeriodically(villagerList, w).runTaskTimer(VillagePlugin.p, 15, 15);
 		}
 		else
 		{
 			VillagePlugin.ConsoleMsg(ChatColor.YELLOW, " Villagermarker restarted");
+			Bukkit.broadcastMessage(" Villagermarker restarted");
 			particleVillagerTask.cancel();
 			particleVillagerTask = new TaskSpawnVillagerParticlePeriodically(villagerList, w).runTaskTimer(VillagePlugin.p, 15, 15);
 		}
@@ -379,6 +434,7 @@ class TaskSpawnMeetingPointParticlePeriodically extends BukkitRunnable
 		if (meetingPoints.isEmpty()) 
 		{
 			VillagePlugin.ConsoleMsg(ChatColor.YELLOW, villagerList.size() + " kein Meeting Point gefunden");
+			Bukkit.broadcastMessage(villagerList.size() + " kein Meeting Point gefunden");
 		}
 	}
 }
